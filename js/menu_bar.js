@@ -1,16 +1,26 @@
 const swup = window.swup;
 
 import * as t  from './tab.js';
+import * as d  from './scroll_bar.js';
 
 export function tab(){
+
+
+
   t.enableDrag2("new-square");
+  
   
   const menuLinks = document.querySelectorAll('.menu-link');
   const rectangularBar = document.querySelector('.rectangular-bar');
   const screen = document.querySelector('.screen');
   const application = document.querySelectorAll('.application');
+
   const height = '30vh';
   const width = '30vw';
+  
+  d.updateThumb();
+
+  
 
   // Vérifications initiales
   if (!menuLinks.length || !rectangularBar || !screen) {
@@ -28,33 +38,42 @@ export function tab(){
       if (app === 'application1') {
         appDiv =  t.createDiv("application1", "application", " ", rectangularBar, 'img/github.png', null, null);
         if (appDiv) {
-          t.createSquare(screen, 'application1_tab', 'application1', 'inner-application1', null,  width, height, 'Github');
-          t.html_injector('html/github.html', 'inner-application1');
+          t.createSquare(screen, 'application1_tab', 'application1', 'inner-application1', 'inner-content1',null,  width, height, 'Github');
+          t.html_injector('html/github.html', 'inner-content1');
         }
+        d.update_size_thumbs();
 
       } else if (app === 'application2') {
         appDiv =  t.createDiv("application2", "application", " ", rectangularBar, 'img/linkedin.png', null, null);
         if (appDiv) {
-          t.createSquare(screen, 'application2_tab', 'application2', 'inner-application2', null,  width, height, 'Linkedin');
+          t.createSquare(screen, 'application2_tab', 'application2', 'inner-application2', 'inner-content2',null,  width, height, 'Linkedin');
         }
+        t.html_injector('html/linkedin.html', 'inner-content2');
+        d.update_size_thumbs();
 
       } else if (app === 'application3') {
         appDiv =  t.createDiv("application3", "application", " ", rectangularBar, 'img/main_style.gif', null, null);
         if (appDiv) {
-          t.createSquare(screen, 'application3_tab', 'application3', 'inner-application3', null,  width, height, 'Application3');
+          t.createSquare(screen, 'application3_tab', 'application3', 'inner-application3', 'inner-content3',null,  width, height, 'Application3');
         }
+        t.html_injector('html/github.html', 'inner-content3');
+        d.update_size_thumbs();
 
       } else if (app === 'application4') {
         appDiv =  t.createDiv("application4", "application", " ", rectangularBar, 'img/main_style.gif', null, null);
         if (appDiv) {
-          t.createSquare(screen, 'application4_tab', 'application4', 'inner-application4', null,  width, height, 'Application4');
+          t.createSquare(screen, 'application4_tab', 'application4', 'inner-application4', 'inner-content4',null,  width, height, 'Application4');
         }
+        t.html_injector('html/github.html', 'inner-content4');
+        d.update_size_thumbs();
 
       } else if (app === 'application5') {
         appDiv =  t.createDiv("application5", "application", " ", rectangularBar, 'img/main_style.gif');
         if (appDiv) {
-          t.createSquare(screen, 'application5_tab', 'application5', 'inner-application5', null,  width, height, 'Application5');
+          t.createSquare(screen, 'application5_tab', 'application5', 'inner-application5', 'inner-content5',null,  width, height, 'Application5');
         }
+        t.html_injector('html/github.html', 'inner-content5');
+        d.update_size_thumbs();
 
       }  else {
         console.log('Autre application sélectionnée');
@@ -68,6 +87,8 @@ export function tab(){
       }
     });
   });
+
+  
   const folderExplorer = document.getElementById('application6');
   let application6;  // Variable pour vérifier si l'application est ouverte
   
@@ -81,7 +102,7 @@ export function tab(){
       // Si c'est l'application6
       if (app === 'application6') {
         // Créer la div de l'application
-        t.createSquare(screen, 'application6_tab', 'application6', 'inner-application6', null, width, height,'Explorateur de fichier');
+        t.createSquare(screen, 'application6_tab', 'application6', 'inner-application6', null, null, width, height,'Explorateur de fichier');
   
         // Assigner l'élément de l'application à la variable
         application6 = document.getElementById('inner-application6');

@@ -15,8 +15,8 @@ export function positionMenuItems() {
         let left, top;
 
         do {
-            left = getRandomPosition(12, 72, 12, usedPositions);
-            top = getRandomPosition(10, 55, 10, usedPositions);
+            left = getRandomPosition(6, 72, 6, usedPositions);
+            top = getRandomPosition(12,48, 12, usedPositions);
         } while (usedPositions.some(pos => pos.left === left && pos.top === top));
 
         usedPositions.push({ left, top });
@@ -76,18 +76,18 @@ export function enableDrag() {
                     const currentLeftVW = parseFloat(item.style.left);
                     const currentTopVH = parseFloat(item.style.top);
 
-                    const gridWidthVW = 12; 
-                    const gridHeightVH = 10; 
+                    const gridWidthVW = 6; 
+                    const gridHeightVH = 12; 
 
                     const snappedLeftVW = snapToGrid(currentLeftVW, gridWidthVW);
                     const snappedTopVH = snapToGrid(currentTopVH, gridHeightVH);
 
-                    if (snappedLeftVW <= 10) item.style.left = `${10}vw`;
+                    if (snappedLeftVW <= 6) item.style.left = `${6}vw`;
                     else if (snappedLeftVW >= 72) item.style.left = `${72}vw`;
                     else{item.style.left = `${snappedLeftVW}vw`}
 
                     if (snappedTopVH <= 12) item.style.top = `${12}vh`;
-                    else if (snappedTopVH >= 55) item.style.top = `${55}vh`;
+                    else if (snappedTopVH >= 48) item.style.top = `${48}vh`;
                     else{item.style.top = `${snappedTopVH}vh`;}
                     
                 },

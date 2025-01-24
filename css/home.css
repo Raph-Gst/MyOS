@@ -3,7 +3,7 @@ html {
     scroll-behavior: smooth;
     cursor: default;
     user-select: none;
-    
+
 }
 
 body {
@@ -13,7 +13,7 @@ body {
     color: #FFFFFF;
     width: 100%;
     background-color: teal;
-    
+
 }
 
 
@@ -270,7 +270,7 @@ footer {
     top: 46%;                  /* Positionne la div au centre verticalement */
     left: 50.5%;                 /* Positionne la div au centre horizontalement */
     transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
-    overflow: auto;            /* Si le contenu dépasse, ajoute des barres de défilement */
+    overflow: hidden;            /* Si le contenu dépasse, ajoute des barres de défilement */
 }
 
 
@@ -439,7 +439,7 @@ footer {
     top: 50%; /* Centrage vertical */
     left: 50%; /* Centrage horizontal */
     margin-top: 0; /* Plus besoin de margin-top */
-    transition: all 0.1s ease; /* Gère les animations si nécessaire */
+    transition: all 0.05s ease; /* Gère les animations si nécessaire */
     background-color: #C0C0C0; /* Exemple : pour tester */
     z-index: 1;
     
@@ -448,19 +448,60 @@ footer {
     width: calc(100% - 1.5vw); /* Taille légèrement plus petite que le parent */
     height: calc(90% - 2vh); /* Taille légèrement plus petite que le parent */
     border: 0.5vw solid #C0C0C0;
-    background-color: #FFFFFF;
+    background-color: #212121;
     position: absolute; /* Permet de positionner cet élément indépendamment */
     top: 55%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
     transform: translate(-50%, -50%); /* Assure le centrage parfait */
     justify-content: center;
+    overflow: hidden;     
     z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
     box-shadow: 
         inset 1px 1px  0px rgba(0, 0, 0, 1),
         -1px -1px 0px rgb(255, 255, 255),
         1px 1px 0px rgb(0, 0, 0);
   }
-  /* Carré rouge en haut à droite */
+
+  #inner-application1{
+    background-color: #212121;
+  }
+  
+.border-inner-contener .inner_contener{
+    
+    
+        width: calc(100% - 1.5vw); /* Taille légèrement plus petite que le parent */
+        height: calc(100% - 1vh); /* Taille légèrement plus petite que le parent */
+        margin: 0.5vw ;
+        justify-content: center;
+        overflow: auto;     
+        overflow-y: hidden;
+    
+        z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
+        align-items: center; /* Centre verticalement */
+      
+}
+
+.scroll_bar {
+    position: absolute; /* Position absolue dans le conteneur parent */
+    top: 0; /* Commence en haut */
+    right: 0; /* Alignée à droite */
+    width: 10px; /* Largeur de la barre de défilement */
+    height: 100%; /* Prend toute la hauteur du conteneur parent */
+    background-color: #f0f0f0; /* Couleur de fond de la barre */
+    margin: 0.2vw;
+  }
+  
+  /* Curseur de la barre de défilement */
+  .scroll_thumb {
+    position: absolute; /* Position absolue à l'intérieur de la scrollbar */
+    top: 0; /* Commence en haut */
+    width: 100%; /* Occupe toute la largeur de la scrollbar */
+    height: 50px; /* Hauteur initiale du curseur */
+    background-color: #333; /* Couleur du curseur */
+    border-radius: 0; /* Pas d'arrondi, style angulaire */
+    cursor: pointer;
+    padding: 10px;
+  }
 
   .minus_button,
 .full_screen_btn,
@@ -468,7 +509,6 @@ footer {
     position: absolute;
     width: 0.7vw;
     height: 0.7vw;
-    
     display: flex; /* Centre le contenu */
     justify-content: center;
     align-items: center;
@@ -504,7 +544,7 @@ footer {
     background-color: darkred;
 }
   
-  .top_tab {
+.top_tab {
     position: absolute; /* Permet de le fixer par rapport à la div parente */
     top: 0.3vh; /* Positionne en haut de la div parente (ajustable selon besoin) */
     left: 50%; /* Positionne à 50% de la largeur de la div parente */
@@ -524,13 +564,11 @@ footer {
 }
 
 .folder,.inner_folder{
-
     margin-top: 1vh;
     height: 90%;
     margin-bottom: 1vh;
     display: flex;
     align-items: center;
-
 }
 
 .inner_folder{
@@ -543,20 +581,14 @@ footer {
     background-color: #000080;
     
 }
+
+.truc{
+    font-size: 1vw;
+    position: relative;
+}
+
+
+
+
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+html {
+    scroll-behavior: smooth;
+    cursor: default;
+    user-select: none;
+    
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Press Start 2P', sans-serif;
+    color: #FFFFFF;
+    width: 100%;
+    background-color: teal;
+    
+}
+
+
+
+.transition-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 9997; /* Ensure the image is on top */
+    pointer-events: none; /* Make sure the image doesn't block interactions */
+}
+
+html.is-animating .transition-video {
+    opacity: 1;
+}
+
+/*.ciel{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    
+
+}*/
+
+.buttons {
+
+    padding: 0;
+    margin: 0; 
+    width: 100%;
+    height: 8%;
+    position: fixed;
+    bottom: 0; 
+    z-index: 9999;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.power_button{
+
+    padding: 0;
+    margin: 0;
+    padding-top: 1%;
+    width:auto;
+    height: 5%;
+    position: fixed;
+    left: 2%;
+    cursor: pointer;
+}
+
+.source_button{
+    padding-top: 1.5%;
+
+    
+    margin: 0;
+    width:auto;
+    height: 3%;
+    position: fixed;
+    right: 2%;
+    cursor: pointer;
+}
+
+.logo_myos{
+
+    padding: 0;
+    margin: 0;
+    padding-top: 1.5%;
+    width:auto;
+    height:6%;
+    position: fixed;
+    
+}
+
+.tele2{
+    
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9998;
+    pointer-events: none;
+
+}
+
+.tele{
+    object-fit: cover;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 9997;
+    pointer-events: none;
+    opacity: 100%;
+}
+
+.transparent-video{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: 9996;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    opacity: 5%;
+}
+
+#start {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.start.hidden {
+    display: none;
+}
+
+#end {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.end.hidden {
+    display: none;
+}
+
+
+h1{
+
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 5vh;
+    white-space: nowrap;
+    max-height: 10%;
+    min-height: 10%;
+    display: flex;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+}
+
+header {
+
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    z-index: 9995;
+    gap: 5%;
+}
+
+a {
+    font-style: normal;
+    text-decoration: none;
+}
+
+header * {
+    padding: 0;
+    margin: 0;
+    margin-top: 20vh;
+    transition-duration: 250ms;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+}
+
+a{
+    color: #FFFFFF;
+    font-size: 1.5vh;
+    white-space: nowrap;
+    max-height: 10%;
+    min-height: 10%;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+}
+
+
+
+footer {
+    background-color: transparent;
+    top: 80%;
+    padding: 10px;
+    max-height: 10%;
+    min-height: 10%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 0; 
+    white-space: nowrap;
+}
+
+.start_menu {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 10vh;
+    white-space: nowrap;
+    max-height: 10%;
+    min-height: 10%;
+    display: flex;
+}
+
+.start_menu a {
+    text-decoration: none;
+    color: #FFFFFF; 
+    padding: 10px 20px;
+    margin: 5px 0;
+    text-align: center;
+    
+}
+.screen {
+    width:86vw;               /* Largeur de 60% de la largeur de la fenêtre */
+    height: 77vh;              /* Hauteur de 40% de la hauteur de la fenêtre */
+    margin: 0 auto;            /* Centre la div horizontalement */
+    position: absolute;        /* Permet de la positionner précisément */
+    top: 46%;                  /* Positionne la div au centre verticalement */
+    left: 50.5%;                 /* Positionne la div au centre horizontalement */
+    transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
+    overflow: hidden;            /* Si le contenu dépasse, ajoute des barres de défilement */
+}
+
+
+
+.menu_item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* Centrer l'image et le texte */
+    margin: 5px 0;
+    width: 10vw;   /* Largeur réactive en fonction de la largeur de la fenêtre */
+    height: 10vh;  /* Hauteur réactive en fonction de la hauteur de la fenêtre */
+    max-width: 150px;  /* Limite la largeur maximale */
+    max-height: 250px; /* Limite la hauteur maximale */
+    padding: 5px;
+    box-sizing: border-box; /* Inclut le padding dans la taille totale */
+    
+}
+
+.menu_item a {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  /* Centrer l'image et le texte dans le lien */
+    width: 100%;
+    height: 100%;  /* S'assure que le lien prend toute la taille du parent */
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.5vw;  /* Ajuste la taille de la police en fonction de la largeur de la fenêtre */
+   
+}
+
+.menu_item img {
+    width: 4vw; /* 20% de la largeur de la fenêtre */
+    height: auto; /* Garde le ratio de l'image */
+    object-fit: contain;  /* L'image s'adapte sans déformation */
+    margin-bottom: 1vh;
+}
+
+
+
+.tv_off{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+
+.landing-start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 15%;
+    left: 0;
+    height: 100vh; /* 100% de la hauteur de la vue */
+    width: 100vw; /* 100% de la largeur de la vue */
+}
+
+.landing-start-container {
+    text-align: center;
+}
+
+.landing-start-text {
+    margin: 0;
+}
+
+.landing-start-arrow {
+    font-size: 4vh;
+    margin-right: 10px;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+    animation: blinker 1s linear infinite;
+}
+
+.start_button {
+    border: 0;
+    padding: 0;
+    background: none;
+    font-size: 100%;
+    font-family: inherit;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+    
+}
+
+.landing-return-arrow {
+    margin: 0;
+    left: 15%;
+    font-size: 4vh;
+    position: absolute;
+    text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+}
+
+.landing-return-arrow:hover {
+
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50%{
+        opacity: 0;
+    }
+}
+
+.rectangular-bar {
+    position: fixed;          /* Fixe l'élément à une position spécifique sur l'écran */
+    bottom: 0vh;             /* Place la div à 15vh du bas de l'écran */
+    left: 0;                  /* Commence à la bordure gauche de l'écran */
+    width: 100%;              /* Prend 100% de la largeur de l'écran */
+    height: 3vw;             /* Hauteur de la div (par exemple, 10vh pour qu'elle soit bien visible) */
+    background-color: #C0C0C0; /* Exemple de couleur de fond (bleu) */
+    border-top: 0.3vh solid #FFFFFF ;
+    z-index: 1;
+}
+.rectangular-bar {
+    display: flex;
+    gap: 0.5vw; 
+  }
+  
+  .start-menu {
+    width: 3vw;
+    height: 3vw; /* Hauteur égale à la largeur */
+    background-image: url('../img/world-4.png'); /* Chemin de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; /* Centre l'image dans la zone */
+    margin-left: 15vw;
+    margin-top: 0.2vh;
+}
+
+.application {
+    width: 3vw;
+    height: 3vw; /* Hauteur égale à la largeur */
+    margin-top: 0.2vh;
+    margin-left: 15px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    z-index: 1;
+}
+
+  #application6{
+    
+    background-image: url('../img/directory.png'); /* Chemin de l'image */
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-position: center; /* Centre l'image dans la zone */
+  }
+  
+  /* Styles pour la div carrée */
+  .new-square {
+
+    position: relative; /* Permet de positionner l'élément indépendamment des autres */
+    top: 50%; /* Centrage vertical */
+    left: 50%; /* Centrage horizontal */
+    margin-top: 0; /* Plus besoin de margin-top */
+    transition: all 0.1s ease; /* Gère les animations si nécessaire */
+    background-color: #C0C0C0; /* Exemple : pour tester */
+    z-index: 1;
+    
+  }
+  .new-square .border-inner-contener {
+    width: calc(100% - 1.5vw); /* Taille légèrement plus petite que le parent */
+    height: calc(90% - 2vh); /* Taille légèrement plus petite que le parent */
+    border: 0.5vw solid #C0C0C0;
+    background-color: #FFFFFF;
+    position: absolute; /* Permet de positionner cet élément indépendamment */
+    top: 55%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Assure le centrage parfait */
+    justify-content: center;
+    z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
+    box-shadow: 
+        inset 1px 1px  0px rgba(0, 0, 0, 1),
+        -1px -1px 0px rgb(255, 255, 255),
+        1px 1px 0px rgb(0, 0, 0);
+  }
+  /* Carré rouge en haut à droite */
+
+  .minus_button,
+.full_screen_btn,
+.close-btn {
+    position: absolute;
+    width: 0.7vw;
+    height: 0.7vw;
+    
+    display: flex; /* Centre le contenu */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 100px; /* Ajoute des coins arrondis */
+    transition: background-color 0.3s ease; /* Transition pour hover */
+}
+
+.minus_button {
+    background-color: green;
+    right: 4vw;
+}
+
+.full_screen_btn {
+    background-color: orange;
+    right: 2.5vw;
+}
+
+.close-btn {
+    background-color: red;
+    right: 1vw;
+}
+
+.minus_button:hover {
+    background-color: darkgreen;
+}
+
+.full_screen_btn:hover {
+    background-color: darkorange;
+}
+
+.close-btn:hover {
+    background-color: darkred;
+}
+  
+  .top_tab {
+    position: absolute; /* Permet de le fixer par rapport à la div parente */
+    top: 0.3vh; /* Positionne en haut de la div parente (ajustable selon besoin) */
+    left: 50%; /* Positionne à 50% de la largeur de la div parente */
+    transform: translateX(-50%); /* Ajuste de moitié la largeur de .top_tab pour le centrer */
+    width: 99%; /* Il prend presque toute la largeur de la div parente */
+    height: 2.2vh; /* Sa hauteur est de 2.2% de la hauteur de la fenêtre (viewport height) */
+    background-color: #000080; /* Couleur de fond */
+    font-size: 0.7vw;
+    align-items: center; /* Centre verticalement */
+    display: flex; 
+}
+
+.application_name{
+    left: 0.7vw;
+    position: absolute;
+    display: flex;
+}
+
+.folder,.inner_folder{
+
+    margin-top: 1vh;
+    height: 90%;
+    margin-bottom: 1vh;
+    display: flex;
+    align-items: center;
+
+}
+
+.inner_folder{
+    background-color: bisque;
+    
+
+}
+
+.folder{
+    background-color: #000080;
+    
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

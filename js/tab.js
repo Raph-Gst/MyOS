@@ -1,6 +1,6 @@
 let lastPosition = { x: 30, y: 30 };
 
-export function createSquare(parentElement, id, id2, id3, backgroundImagePath, width, height, text) {
+export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
   const screenClass = document.querySelector('.screen');
   const screen = screenClass.getBoundingClientRect();
   const newSquare = createDiv(id, 'new-square', '', parentElement, backgroundImagePath, width, height);
@@ -18,7 +18,10 @@ export function createSquare(parentElement, id, id2, id3, backgroundImagePath, w
   if (lastPosition.x > 80) lastPosition.x = 0; 
   if (lastPosition.y > 80) lastPosition.y = 0;
 
-  createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
+  const border_inner_contener = createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
+  const inner_contener = createDiv(id4, 'inner_contener', '', border_inner_contener, backgroundImagePath);
+  const scroll_bar = createDiv(null, 'scroll_bar', '', border_inner_contener, backgroundImagePath);
+  const scroll_thumb = createDiv(null, 'scroll_thumb', '', scroll_bar, backgroundImagePath);
 
   const top_tab = createDiv(null, 'top_tab', '', newSquare, backgroundImagePath);
   
@@ -194,7 +197,12 @@ export function createSquare(parentElement, id, id2, id3, backgroundImagePath, w
 export function enableDrag2(classname) {
   document.addEventListener('pointerdown', function (e) {
       const item = e.target.closest(`.${classname}`);
-      if (!item) return; // Si l'élément cliqué n'a pas la classe spécifiée, on ignore
+
+      // Ignorer si l'élément cliqué n'a pas la classe spécifiée
+      if (!item) return;
+      
+      // Ignorer si l'élément cliqué est un descendant de la classe "scroll-bar"
+      if (e.target.closest('.scroll_bar')) return;
 
       const shiftX = e.clientX - item.getBoundingClientRect().left;
       const shiftY = e.clientY - item.getBoundingClientRect().top;
@@ -225,6 +233,10 @@ export function enableDrag2(classname) {
       function onPointerMove(event) {
           moveAt(event.pageX, event.pageY);
       }
+
+     item.addEventListener('pointerleave', function () {
+        document.removeEventListener('pointermove', onPointerMove);
+    });
 
       document.addEventListener('pointermove', onPointerMove);
 
@@ -319,16 +331,24 @@ export function html_injector(path, id) {
 
   // Charger le contenu du fichier HTML
   fetch(path)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erreur lors du chargement du fichier HTML : ${response.statusText}`);
-      }
-    })
-    .then((html) => {
+  .then((response) => {
+    console.log(response); // Vérifiez la réponse
+    if (!response.ok) {
+      throw new Error(`Erreur lors du chargement du fichier HTML : ${response.statusText}`);
+    }
+    return response.text(); // Récupérer le texte du fichier HTML
+  })
+  .then((html) => {
+    if (html) {
       // Injecter le contenu HTML dans l'élément cible
       element.innerHTML = html;
-    })
-    .catch((error) => {
-      console.error("Erreur lors de l'injection du contenu HTML :", error);
-    });
+      console.log("Contenu HTML injecté avec succès.");
+    } else {
+      console.error("Le contenu HTML récupéré est vide.");
+    }
+  })
+  .catch((error) => {
+    console.error("Erreur lors de l'injection du contenu HTML :", error);
+  });
+
 }
