@@ -271,6 +271,7 @@ footer {
     left: 50.5%;                 /* Positionne la div au centre horizontalement */
     transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
     overflow: hidden;            /* Si le contenu dépasse, ajoute des barres de défilement */
+    cursor: url('../img/Cursor101.png'), pointer;
 }
 
 
@@ -282,8 +283,8 @@ footer {
     align-items: center;
     justify-content: center;  /* Centrer l'image et le texte */
     margin: 5px 0;
-    width: 10vw;   /* Largeur réactive en fonction de la largeur de la fenêtre */
-    height: 10vh;  /* Hauteur réactive en fonction de la hauteur de la fenêtre */
+    width: 8vw;   /* Largeur réactive en fonction de la largeur de la fenêtre */
+    height: 8vh;  /* Hauteur réactive en fonction de la hauteur de la fenêtre */
     max-width: 150px;  /* Limite la largeur maximale */
     max-height: 250px; /* Limite la hauteur maximale */
     padding: 5px;

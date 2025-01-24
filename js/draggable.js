@@ -7,7 +7,7 @@ export function getRandomPosition(min, max, step, usedPositions) {
     return randomValue;
 }
 
-export function positionMenuItems() {
+export function positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
     const menuItems = document.querySelectorAll('.menu_item');
     const usedPositions = [];
 
@@ -15,8 +15,8 @@ export function positionMenuItems() {
         let left, top;
 
         do {
-            left = getRandomPosition(6, 72, 6, usedPositions);
-            top = getRandomPosition(12,48, 12, usedPositions);
+            left = getRandomPosition(minWidth, maxWidth, stepWidth, usedPositions);
+            top = getRandomPosition(minHeight,maxHeight, stepHeight, usedPositions);
         } while (usedPositions.some(pos => pos.left === left && pos.top === top));
 
         usedPositions.push({ left, top });
@@ -27,7 +27,7 @@ export function positionMenuItems() {
 }
 
 
-export function enableDrag() {
+export function enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
     document.querySelectorAll('.menu_item').forEach(item => {
         item.addEventListener('pointerdown', function (e) {
             const rect = item.getBoundingClientRect(); // Récupère la position et les dimensions de l'élément
@@ -76,18 +76,18 @@ export function enableDrag() {
                     const currentLeftVW = parseFloat(item.style.left);
                     const currentTopVH = parseFloat(item.style.top);
 
-                    const gridWidthVW = 6; 
-                    const gridHeightVH = 12; 
+                    const gridWidthVW = stepWidth; 
+                    const gridHeightVH = stepHeight; 
 
                     const snappedLeftVW = snapToGrid(currentLeftVW, gridWidthVW);
                     const snappedTopVH = snapToGrid(currentTopVH, gridHeightVH);
-
-                    if (snappedLeftVW <= 6) item.style.left = `${6}vw`;
-                    else if (snappedLeftVW >= 72) item.style.left = `${72}vw`;
+                   
+                    if (snappedLeftVW <= minWidth) item.style.left = `${minWidth}vw`;
+                    else if (snappedLeftVW >= maxWidth) item.style.left = `${maxWidth}vw`;
                     else{item.style.left = `${snappedLeftVW}vw`}
 
-                    if (snappedTopVH <= 12) item.style.top = `${12}vh`;
-                    else if (snappedTopVH >= 48) item.style.top = `${48}vh`;
+                    if (snappedTopVH <= minHeight) item.style.top = `${minHeight}vh`;
+                    else if (snappedTopVH >= maxHeight) item.style.top = `${maxHeight}vh`;
                     else{item.style.top = `${snappedTopVH}vh`;}
                     
                 },
@@ -99,7 +99,7 @@ export function enableDrag() {
     });
 }
 
-export function initialize() {
-    positionMenuItems();
-    enableDrag();
+export function initialize(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
+    positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth);
+    enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth);
 }
