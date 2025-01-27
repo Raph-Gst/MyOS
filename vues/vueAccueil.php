@@ -10,31 +10,32 @@
         <div id="swup" data-swup>
             <div class="menu_item">
                 <a class="menu-link" data-application="application1">
-                    <img src="img/github.png" class="hover_gif" alt="GIF">
+                    <img src="img/github.png" class="hover_gif" >
                     Github
                 </a>
             </div>
             <div class="menu_item">
                 <a class="menu-link" data-application="application2">
-                    <img src="img/linkedin.png" class="hover_gif" alt="GIF">
+                    <img src="img/linkedin.png" class="hover_gif" >
                     Linkedin
                 </a>
             </div>
             <div class="menu_item">
-                <a class="menu-link" data-application="application3">
-                    <img src="img/directory.png" class="hover_gif" alt="GIF">
+                <a class="folder_shortcut" data-application="shortcut1">
+                    <img src="img/directory.png" class="hover_gif">
                     Programmation
                 </a>
             </div>
             <div class="menu_item">
-                <a class="menu-link" data-application="application4">
-                    <img src="img/directory.png" class="hover_gif" alt="GIF">
+                <a class="folder_shortcut" data-application="shortcut2">
+                    <img src="img/directory.png" class="hover_gif">
                     Modélisation 3D
                 </a>
             </div>
             <div class="menu_item">
-                <a class="menu-link" data-application="application5">
-                    <img src="img/directory.png" class="hover_gif" alt="GIF">
+                <a class="folder_shortcut" data-application="shortcut3">
+                    <img src="img/directory.png" class="hover_gif">
+          
                     Autres...
                 </a>
             </div>

@@ -97,11 +97,21 @@ export function update_size_thumbs(){
             thumb.style.height = `${new_height}px`;
 
             const thumbHeight = parseFloat(thumb.style.height); // Convertir la hauteur du thumb en nombre
-            if (thumbHeight > height_scroll_bar && parseFloat(text.style.top || "0") !== 0) {
+
+            if(thumbHeight > height_scroll_bar)
+            {
                 // Réinitialiser les positions si nécessaire
                 text.style.top = `0px`;
-                thumb.style.top = `0px`;
+                thumb.style.visibility = "hidden";
+                scroll_bar.style.visibility = "hidden";
+                
             }
+
+            else {
+                thumb.style.visibility = "visible";
+                scroll_bar.style.visibility = "visible";
+            }
+            
 
             
         }

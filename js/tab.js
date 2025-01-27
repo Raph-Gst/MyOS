@@ -19,7 +19,7 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   if (lastPosition.y > 80) lastPosition.y = 0;
 
   const border_inner_contener = createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
-  const inner_contener = createDiv(id4, 'inner_contener', '', border_inner_contener, backgroundImagePath);
+  if(id != 'application6_tab') createDiv(id4, 'inner_contener', '', border_inner_contener, backgroundImagePath);
   const scroll_bar = createDiv(null, 'scroll_bar', '', border_inner_contener, backgroundImagePath);
   const scroll_thumb = createDiv(null, 'scroll_thumb', '', scroll_bar, backgroundImagePath);
 
@@ -319,36 +319,47 @@ export function IndexClickApplication(div) {
   });
 }
 
-export function html_injector(path, id) {
-  // Récupérer l'élément cible à partir de son ID
-  const element = document.getElementById(id);
 
-  // Vérifier si l'élément existe
-  if (!element) {
-    console.error(`L'élément avec l'ID "${id}" est introuvable.`);
-    return;
-  }
+import DOMPurify from 'https://cdn.jsdelivr.net/npm/dompurify@3.0.1/dist/purify.es.min.js';
 
-  // Charger le contenu du fichier HTML
-  fetch(path)
-  .then((response) => {
-    console.log(response); // Vérifiez la réponse
-    if (!response.ok) {
-      throw new Error(`Erreur lors du chargement du fichier HTML : ${response.statusText}`);
+export function html_injector(path, id, className, newId) {
+  return new Promise((resolve, reject) => {
+    const element = document.getElementById(id);
+
+    if (!element) {
+      reject(new Error(`L'élément avec l'ID "${id}" est introuvable.`));
+      return;
     }
-    return response.text(); // Récupérer le texte du fichier HTML
-  })
-  .then((html) => {
-    if (html) {
-      // Injecter le contenu HTML dans l'élément cible
-      element.innerHTML = html;
-      console.log("Contenu HTML injecté avec succès.");
-    } else {
-      console.error("Le contenu HTML récupéré est vide.");
-    }
-  })
-  .catch((error) => {
-    console.error("Erreur lors de l'injection du contenu HTML :", error);
+
+    fetch(path)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erreur lors du chargement du fichier HTML : ${response.statusText}`);
+        }
+        return response.text();
+      })
+      .then((html) => {
+        if (html) {
+          element.innerHTML = html;
+
+          // Ajoute un nouvel ID si nécessaire
+          if (className && newId) {
+            const targetElement = element.querySelector(`.${className}`);
+            if (targetElement) {
+              targetElement.id = newId;
+            }
+          }
+
+          console.log(`Contenu HTML injecté dans l'élément avec l'ID "${id}".`);
+          resolve(); // Résolution de la promesse
+        } else {
+          throw new Error("Le contenu HTML récupéré est vide.");
+        }
+      })
+      .catch((error) => {
+        console.error(`Erreur lors de l'injection du contenu HTML : ${error.message}`);
+        reject(error); // Rejet de la promesse
+      });
   });
-
 }
+

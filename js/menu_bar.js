@@ -51,30 +51,7 @@ export function tab(){
         t.html_injector('html/linkedin.html', 'inner-content2');
         d.update_size_thumbs();
 
-      } else if (app === 'application3') {
-        appDiv =  t.createDiv("application3", "application", " ", rectangularBar, 'img/main_style.gif', null, null);
-        if (appDiv) {
-          t.createSquare(screen, 'application3_tab', 'application3', 'inner-application3', 'inner-content3',null,  width, height, 'Application3');
-        }
-        t.html_injector('html/github.html', 'inner-content3');
-        d.update_size_thumbs();
-
-      } else if (app === 'application4') {
-        appDiv =  t.createDiv("application4", "application", " ", rectangularBar, 'img/main_style.gif', null, null);
-        if (appDiv) {
-          t.createSquare(screen, 'application4_tab', 'application4', 'inner-application4', 'inner-content4',null,  width, height, 'Application4');
-        }
-        t.html_injector('html/github.html', 'inner-content4');
-        d.update_size_thumbs();
-
-      } else if (app === 'application5') {
-        appDiv =  t.createDiv("application5", "application", " ", rectangularBar, 'img/main_style.gif');
-        if (appDiv) {
-          t.createSquare(screen, 'application5_tab', 'application5', 'inner-application5', 'inner-content5',null,  width, height, 'Application5');
-        }
-        t.html_injector('html/github.html', 'inner-content5');
-        d.update_size_thumbs();
-
+      
       }  else {
         console.log('Autre application sélectionnée');
       }
@@ -89,34 +66,7 @@ export function tab(){
   });
 
   
-  const folderExplorer = document.getElementById('application6');
-  let application6;  // Variable pour vérifier si l'application est ouverte
-  
-  if (folderExplorer) {
-    folderExplorer.addEventListener('dblclick', (e) => {
-      const app = folderExplorer.dataset.application;
-      console.log(`Application sélectionnée : ${app}`);
-  
-
-  
-      // Si c'est l'application6
-      if (app === 'application6') {
-        // Créer la div de l'application
-        t.createSquare(screen, 'application6_tab', 'application6', 'inner-application6', null, null, width, height,'Explorateur de fichier');
-  
-        // Assigner l'élément de l'application à la variable
-        application6 = document.getElementById('inner-application6');
-  
-        // Créer les deux divs à l'intérieur de l'application
-        t.createTwoDivs(application6, 'folder', 'folder_main', 20, 'inner_folder', 'inner_folder', 70);
-  
-        // Ajouter un bouton de fermeture à l'application
-
-      }
-    });
-  } else {
-    console.error("L'élément avec l'ID 'folder-explorer' est introuvable dans le DOM.");
-  }
+ 
 }
 
 
