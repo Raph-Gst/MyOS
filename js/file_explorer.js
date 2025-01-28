@@ -6,8 +6,8 @@ export function update_file_explorer() {
     const screen = document.querySelector('.screen');
     const shortcut = document.querySelectorAll('.shortcut');
 
-    const height = '30vh';
-    const width = '30vw';
+    const height = '40vh';
+    const width = '40vw';
     const data_div = 'shortcut';
     const data_div2 = 'folder';
 

@@ -604,30 +604,40 @@ footer {
     height: 80%; /* Prend 80% de la hauteur totale */
     width: 100%; /* S'étend sur toute la largeur */
 }
-/* Style pour le dossier principal dans la liste */
 .folder {
-    background-color: lightblue; 
+    
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    width: 10vw; 
-    height: 5vh; 
+    flex-direction: column;
+    width: 22%; /* La largeur du dossier */
+    height: 30%; /* La hauteur du dossier */
     text-align: center; 
-    border: 1px solid gray; 
+    border: 1px solid rgba(96, 96, 96, 0.473); 
     border-radius: 5px; 
     flex-shrink: 0; 
     cursor: pointer; /* Indique que c'est cliquable */
+    
+    
 }
 
-/* Affiche l'image et le texte dans les dossiers */
 .folder img {
-    width: 2vw; 
-    height: 2vw;
-    margin-right: 10px; 
+    height: 60%; /* L'image prend 70% de la hauteur de .folder */
+    width: auto; /* La largeur s'ajuste automatiquement en gardant les proportions */
+    margin: 5%; /* Espacement entre l'image et le texte */
 }
 
 .folder p {
+    
+    font-size: clamp(0.1vw, 0.6vw, 0.75vw);
+    width: 80%;
+    line-height: 1; /* Ajuste l'interligne pour bien centrer */
+    text-align: center; /* Centre le texte dans sa zone */
     margin: 0; 
+    
+    overflow: hidden; /* Cache le texte si débordement */
+    text-overflow: clip; /* Ajoute "..." si le texte est trop long */
+    white-space: normal; /* Empêche de passer à la ligne */
 }
 
 /* Style des dossiers dans la liste */
@@ -639,12 +649,14 @@ footer {
     flex-direction: column; 
     padding: 10px; 
     overflow-y: auto; 
-    font-size: 0.8vw;
+    font-size: 0.5vw;
+    column-gap: 2%;
+    
 }
 
 /* Style des inner folders */
 .inner_folders {
-    background-color: bisque; 
+    background-color: #C0C0C0; 
     
     width: 80%; 
     height: 100%; 
@@ -658,7 +670,17 @@ footer {
     overflow-y: auto;
 }
 
-
+.inner_folder{
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    flex-direction: row;  
+    gap: 0.1vw;
+    
+    flex-wrap: wrap; 
+    align-items: flex-start; 
+    justify-content: flex-start; 
+}
 
 
 .folder1 {
@@ -666,21 +688,30 @@ footer {
     display: flex; /* Aligne le contenu interne */
     flex-direction: row;
     align-items: center; /* Centre verticalement l'image et le texte */
-    justify-content: center; /* Centre horizontalement l'image et le texte */
+    justify-content: left; /* Centre horizontalement l'image et le texte */
     width: 99%; /* Largeur fixe pour chaque dossier */
-    height: 5vh; /* Hauteur fixe pour chaque dossier */
+    height: 10%; /* Hauteur fixe pour chaque dossier */
     text-align: center; /* Centre le texte */
     border: 1px solid gray; /* Ajoute une bordure */
     border-radius: 5px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
+    cursor: pointer;
 }
   
 .folder1 img {
-    width: 2vw; /* Taille de l'image ajustée pour correspondre au dossier */
-    height: 2vw;
-    margin: 10px; /* Espace entre l'image et le texte */
+
+    width: 15%; /* Taille de l'image ajustée pour correspondre au dossier */
+    height: auto;
+    margin: 5%; /* Espacement entre l'image et le texte */
 }
 
 .folder1 p {
     margin: 0; /* Supprime toute marge pour éviter des espaces inattendus */
+    width: 60%;
+    height: auto;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
 }
