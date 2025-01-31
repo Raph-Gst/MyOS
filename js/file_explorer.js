@@ -10,6 +10,7 @@ export function update_file_explorer() {
     const width = '40vw';
     const data_div = 'shortcut';
     const data_div2 = 'folder';
+    openFolder();
 
     t.IndexClickApplication(shortcut);
     folder_shortcut.forEach((link) => {
@@ -20,11 +21,14 @@ export function update_file_explorer() {
             let shortcutDiv;
 
             if (short === `${data_div}1`) {
-                handleShortcut(`${data_div}1`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/Documents.html');
+                handleShortcut(`${data_div}1`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/Documents/dev.html');
+                
               } else if (short === `${data_div}2`) {
-                handleShortcut(`${data_div}2`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/Programmes.html');
+                handleShortcut(`${data_div}2`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/Documents/3D.html');
+                
               } else if (short === `${data_div}3`) {
-                handleShortcut(`${data_div}3`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/Vidéos.html');
+                handleShortcut(`${data_div}3`, data_div, data_div2, rectangularBar, screen, width, height, 'html/fileManagerStructure/vidéos.html');
+                
               }
              else {
                 console.log('Autre application sélectionnée');
@@ -70,4 +74,29 @@ export function handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen,
           console.error(`Erreur lors de l’injection des contenus HTML pour ${short} :`, error);
         });
     }
+  }
+
+  export function openFolder() {
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('folder')) {
+        const folderID = e.target.id;
+        const list_folder = e.target.parentElement;
+        if(list_folder.classList.contains("inner_folder")){
+          let innercontainer = list_folder.parentElement;
+          if (innercontainer.classList.contains("inner_folders")) { 
+            const innercontainerID = innercontainer.id; 
+            console.log(innercontainerID); 
+            t.html_injector(`html/fileManagerStructure/${folderID}.html`, innercontainerID, null);
+        } else {
+            console.log("Le parent n'a pas la classe 'inner_folders'");
+        }
+          
+        }
+        else{
+          let innercontainer = list_folder.parentElement.querySelector('.inner_folders');
+          const innercontainerID = innercontainer.id;
+          t.html_injector(`html/fileManagerStructure/${folderID}.html`, innercontainerID, null);
+        }
+      }
+    });
   }

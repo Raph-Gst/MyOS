@@ -11,25 +11,25 @@
             <div class="menu_item">
                 <a class="menu-link" data-application="application1">
                     <img src="img/github.png" class="hover_gif" >
-                    Github
+                    Github.exe
                 </a>
             </div>
             <div class="menu_item">
                 <a class="menu-link" data-application="application2">
                     <img src="img/linkedin.png" class="hover_gif" >
-                    Linkedin
+                    Linkedin.exe
                 </a>
             </div>
             <div class="menu_item">
                 <a class="folder_shortcut" data-application="shortcut1">
                     <img src="img/directory.png" class="hover_gif">
-                    Programmation
+                    dev
                 </a>
             </div>
             <div class="menu_item">
                 <a class="folder_shortcut" data-application="shortcut2">
                     <img src="img/directory.png" class="hover_gif">
-                    Modélisation 3D
+                    3D
                 </a>
             </div>
             <div class="menu_item">

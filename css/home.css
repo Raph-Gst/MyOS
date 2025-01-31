@@ -421,7 +421,7 @@ footer {
     margin-top: 0.2vh;
     margin-left: 15px;
     cursor: pointer;
-    transition: all 0.1s ease;
+    
     z-index: 1;
 }
 
@@ -683,7 +683,7 @@ footer {
 }
 
 
-.folder1 {
+.list_folder  .folder {
     
     display: flex; /* Aligne le contenu interne */
     flex-direction: row;
@@ -698,14 +698,14 @@ footer {
     cursor: pointer;
 }
   
-.folder1 img {
+.list_folder .folder img {
 
     width: 15%; /* Taille de l'image ajustée pour correspondre au dossier */
     height: auto;
     margin: 5%; /* Espacement entre l'image et le texte */
 }
 
-.folder1 p {
+.list_folder .folder p {
     margin: 0; /* Supprime toute marge pour éviter des espaces inattendus */
     width: 60%;
     height: auto;
