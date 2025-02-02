@@ -4,69 +4,42 @@ import * as t  from './tab.js';
 import * as d  from './scroll_bar.js';
 
 export function tab(){
-
-
-
   t.enableDrag2("new-square");
-  
-  
-  const menuLinks = document.querySelectorAll('.menu-link');
+
   const rectangularBar = document.querySelector('.rectangular-bar');
   const screen = document.querySelector('.screen');
-  const application = document.querySelectorAll('.application');
-
+ 
   const height = '30vh';
   const width = '30vw';
   
   d.updateThumb();
 
-  
-
-  // Vérifications initiales
-  if (!menuLinks.length || !rectangularBar || !screen) {
+  if ( !rectangularBar || !screen) {
     console.warn("Un ou plusieurs éléments nécessaires (menu-links, rectangular-bar, screen) n'existent pas dans le DOM.");
     return;
   }
-  t.IndexClickApplication(application);
-  menuLinks.forEach((link) => {
-    link.addEventListener('dblclick', function () {
-      const app = link.dataset.application;
-      console.log(`Application sélectionnée : ${app}`);
 
+  openApp(rectangularBar, screen, width, height);
+  t.IndexClickApplication('application');
+}
+
+  export function openApp(rectangularBar, screen, width, height) {
+   
+    document.addEventListener('click', function (e) {
       let appDiv;
-
-      if (app === 'application1') {
-        appDiv =  t.createDiv("application1", "application", " ", rectangularBar, 'img/github.png', null, null);
+      let appID = e.target.id;
+      if (e.target.classList.contains('menu_item') && !appID.startsWith("shortcut_folder")) {
+        appID = e.target.firstElementChild?.id; 
+        
+        appDiv =  t.createDiv(`application_${appID}`, "application", " ", rectangularBar, `img/${appID}.png`, null, null);
         if (appDiv) {
-          t.createSquare(screen, 'application1_tab', 'application1', 'inner-application1', 'inner-content1',null,  width, height, 'Github');
-          t.html_injector('html/github.html', 'inner-content1');
+          t.createSquare(screen, `application_${appID}_tab`, `application_${appID}`, 'inner-application1', `inner_content_${appID}`,null,  width, height, `${appID}`);
+          t.html_injector(`html/${appID}.html`, `inner_content_${appID}`);
         }
         d.update_size_thumbs();
-
-      } else if (app === 'application2') {
-        appDiv =  t.createDiv("application2", "application", " ", rectangularBar, 'img/linkedin.png', null, null);
-        if (appDiv) {
-          t.createSquare(screen, 'application2_tab', 'application2', 'inner-application2', 'inner-content2',null,  width, height, 'Linkedin');
-        }
-        t.html_injector('html/linkedin.html', 'inner-content2');
-        d.update_size_thumbs();
-
-      
-      }  else {
-        console.log('Autre application sélectionnée');
-      }
-
-      // Log supplémentaire
-      if (appDiv) {
-        console.log(`Application ${app} créée avec succès.`);
-      } else {
-        console.warn(`Application ${app} existe déjà ou un problème est survenu.`);
       }
     });
-  });
-
-  
- 
-}
+   
+  }
 
 

@@ -303,7 +303,7 @@ footer {
     color: inherit;
     text-decoration: none;
     font-size: 0.5vw;  /* Ajuste la taille de la police en fonction de la largeur de la fenêtre */
-   
+    pointer-events: none;
 }
 
 .menu_item img {
@@ -311,6 +311,7 @@ footer {
     height: auto; /* Garde le ratio de l'image */
     object-fit: contain;  /* L'image s'adapte sans déformation */
     margin-bottom: 1vh;
+    pointer-events: none;
 }
 
 
@@ -425,7 +426,7 @@ footer {
     z-index: 1;
 }
 
-  #application6{
+  #file_explorer_main{
     
     background-image: url('../img/directory.png'); /* Chemin de l'image */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
@@ -696,10 +697,11 @@ footer {
     border-radius: 5px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
     cursor: pointer;
+    
 }
   
 .list_folder .folder img {
-
+    pointer-events: none;
     width: 15%; /* Taille de l'image ajustée pour correspondre au dossier */
     height: auto;
     margin: 5%; /* Espacement entre l'image et le texte */
@@ -713,5 +715,5 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    
+    pointer-events: none;
 }

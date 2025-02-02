@@ -113,33 +113,6 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
 }
 
 
-
-
- export function createTwoDivs(parentElement, class1, id1, width1, class2, id2, width2) {
-    // Vérifier si le parent existe
-    if (!parentElement) {
-      console.error("Le parent spécifié n'existe pas dans le DOM.");
-      return;
-    }
-  
-    // Créer le premier div
-    const div1 = document.createElement('div');
-    div1.className = class1;
-    div1.id = id1;
-    div1.style.width = `${width1}%`;
-
-    div1.style.display = 'inline-block';
-    parentElement.appendChild(div1);
-  
-    // Créer le second div
-    const div2 = document.createElement('div');
-    div2.className = class2;
-    div2.id = id2;
-    div2.style.width = `${width2}%`;
-
-    div2.style.display = 'inline-block';
-    parentElement.appendChild(div2);
-  }
   
   export function createDiv(id, className, textContent, parentElement, backgroundImagePath, width, height) {
     const newDiv = document.createElement('div');
@@ -171,6 +144,7 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   
     if (parentElement) {
       const existingApp = parentElement.querySelector('#' + id);
+      console.log("le truc est " + existingApp);
       if (existingApp) {
         console.log('Une application avec cet ID est déjà ouverte.');
         return;
@@ -283,39 +257,24 @@ export function IndexUpdate(){
     });
 }
 
-export function IndexClickApplication(div) {
+export function IndexClickApplication(classname) {
   
 
-  div.forEach((link) => {
-    console.log('Ajout d\'un événement "click" pour l\'application :', link.id);
+  document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('classname')) {
+          const appID = e.target.id;
+          const appID_tab = document.getElementById(`${appID}_tab`);
 
-    link.addEventListener('click', function () {
-      const appId = link.id; // Récupère l'ID de l'élément cliqué
-      console.log(`ID de l'application cliquée : ${appId}`);
+          if (appID_tab) {
+              const allTabs = document.querySelectorAll('.new-square'); // Récupère toutes les divs avec la classe
 
-      if(appId === 'folder-explorer') return;
+              // Réinitialise le z-index de toutes les divs
+              allTabs.forEach(tab => tab.style.zIndex = 1);
 
-      const tabId = `${appId}_tab`; // Génère l'ID associé (par exemple, 'application1_tab')
-      console.log(`ID de la tab associée : ${tabId}`);
-
-      // Réinitialiser tous les z-index avant de mettre à jour
-      const allTabs = document.querySelectorAll('[id$="_tab"]'); // Tous les éléments dont l'ID se termine par '_tab'
-      console.log('Toutes les tabs trouvées pour réinitialisation :', allTabs);
-
-      allTabs.forEach((tab) => {
-        console.log(`Réinitialisation du z-index de : ${tab.id}`);
-        tab.style.zIndex = 1; // Réinitialisation à 1
-      });
-
-      // Appliquer le z-index élevé à l'élément tab correspondant
-      const selectedTab = document.getElementById(tabId);
-      if (selectedTab) {
-        console.log(`Tab trouvée pour mise à jour du z-index : ${selectedTab.id}`);
-        selectedTab.style.zIndex = 10; // Z-index élevé pour la tab sélectionnée
-      } else {
-        console.warn(`Aucun élément trouvé avec l'ID "${tabId}"`);
+              // Met le z-index de la div sélectionnée à 10
+              appID_tab.style.zIndex = 10;
+          }
       }
-    });
   });
 }
 
@@ -362,4 +321,6 @@ export function html_injector(path, id, className, newId) {
       });
   });
 }
+
+
 
