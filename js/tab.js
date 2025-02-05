@@ -17,13 +17,14 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
 
   if (lastPosition.x > 80) lastPosition.x = 0; 
   if (lastPosition.y > 80) lastPosition.y = 0;
+  const top_tab = createDiv(null, 'top_tab', '', newSquare, backgroundImagePath);
 
   const border_inner_contener = createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
   if(id != 'application6_tab') createDiv(id4, 'inner_contener', '', border_inner_contener, backgroundImagePath);
   const scroll_bar = createDiv(null, 'scroll_bar', '', border_inner_contener, backgroundImagePath);
   const scroll_thumb = createDiv(null, 'scroll_thumb', '', scroll_bar, backgroundImagePath);
 
-  const top_tab = createDiv(null, 'top_tab', '', newSquare, backgroundImagePath);
+  
   
 
   const closeButton = createDiv(null, 'close-btn', '', top_tab, null, null, null);
@@ -170,10 +171,12 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
 
 export function enableDrag2(classname) {
   document.addEventListener('pointerdown', function (e) {
-      const item = e.target.closest(`.${classname}`);
+      let item = e.target.closest(`.${classname}`);
 
       // Ignorer si l'élément cliqué n'a pas la classe spécifiée
       if (!item) return;
+
+      item = item.parentElement;
       
       // Ignorer si l'élément cliqué est un descendant de la classe "scroll-bar"
       if (e.target.closest('.scroll_bar')) return;
@@ -257,7 +260,7 @@ export function IndexUpdate(){
     });
 }
 
-export function IndexClickApplication(classname) {
+export function IndexClickApplication(classname, classname2) {
   
 
   document.addEventListener('click', function (e) {
@@ -301,13 +304,7 @@ export function html_injector(path, id, className, newId) {
         if (html) {
           element.innerHTML = html;
 
-          // Ajoute un nouvel ID si nécessaire
-          if (className && newId) {
-            const targetElement = element.querySelector(`.${className}`);
-            if (targetElement) {
-              targetElement.id = newId;
-            }
-          }
+          change_id(element, className, newId);
 
           console.log(`Contenu HTML injecté dans l'élément avec l'ID "${id}".`);
           resolve(); // Résolution de la promesse
@@ -324,3 +321,11 @@ export function html_injector(path, id, className, newId) {
 
 
 
+export function change_id(parentElement, className, newId ) {
+  if (parentElement && className && newId) {
+    const targetElement = parentElement.querySelector(`.${className}`);
+    if (targetElement) {
+      targetElement.id = newId;
+    }
+  }
+}

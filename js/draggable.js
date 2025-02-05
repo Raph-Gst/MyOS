@@ -28,8 +28,15 @@ export function positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, step
 
 
 export function enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
-    document.querySelectorAll('.menu_item').forEach(item => {
-        item.addEventListener('pointerdown', function (e) {
+    
+        document.addEventListener('pointerdown', function (e) {
+
+            let item = e.target.closest(`.menu_item`);
+
+            // Ignorer si l'élément cliqué n'a pas la classe spécifiée
+             if (!item) return;
+
+            
             const rect = item.getBoundingClientRect(); // Récupère la position et les dimensions de l'élément
             const shiftX = e.clientX - rect.left;
             const shiftY = e.clientY - rect.top;
@@ -93,7 +100,7 @@ export function enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight,
                 },
                 { once: true }
             );
-        });
+        
 
         item.ondragstart = () => false;
     });

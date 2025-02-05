@@ -285,8 +285,7 @@ footer {
     margin: 5px 0;
     width: 8vw;   /* Largeur réactive en fonction de la largeur de la fenêtre */
     height: 8vh;  /* Hauteur réactive en fonction de la hauteur de la fenêtre */
-    max-width: 150px;  /* Limite la largeur maximale */
-    max-height: 250px; /* Limite la hauteur maximale */
+
     padding: 5px;
     box-sizing: border-box; /* Inclut le padding dans la taille totale */
     
@@ -313,6 +312,44 @@ footer {
     margin-bottom: 1vh;
     pointer-events: none;
 }
+
+.inner_folder .menu_item{
+    position: static;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column;
+    width: 22%; /* La largeur du dossier */
+    height: 30%; /* La hauteur du dossier */
+    text-align: center; 
+    border: 1px solid rgba(96, 96, 96, 0.473); 
+    border-radius: 5px; 
+    flex-shrink: 0; 
+    cursor: pointer; /* Indique que c'est cliquable */
+    padding: 0;
+    margin: 0;
+}
+
+.inner_folder .menu_item img{
+    height: 60%; /* L'image prend 70% de la hauteur de .folder */
+    width: auto; /* La largeur s'ajuste automatiquement en gardant les proportions */
+    margin: 5%; /* Espacement entre l'image et le texte */
+    pointer-events: none;
+}
+
+.inner_folder .menu_item a{
+    font-size: clamp(0.1vw, 0.6vw, 0.75vw);
+    width: 80%;
+    line-height: 1; /* Ajuste l'interligne pour bien centrer */
+    text-align: center; /* Centre le texte dans sa zone */
+    margin: 0; 
+    
+    overflow: hidden; /* Cache le texte si débordement */
+    text-overflow: clip; /* Ajoute "..." si le texte est trop long */
+    white-space: normal; /* Empêche de passer à la ligne */
+    pointer-events: none;
+}
+
 
 
 
@@ -426,6 +463,8 @@ footer {
     z-index: 1;
 }
 
+
+
   #file_explorer_main{
     
     background-image: url('../img/directory.png'); /* Chemin de l'image */
@@ -444,6 +483,9 @@ footer {
     transition: all 0.05s ease; /* Gère les animations si nécessaire */
     background-color: #C0C0C0; /* Exemple : pour tester */
     z-index: 1;
+    border-top-right-radius: 1vw;
+    border-top-left-radius: 1vw;
+    color: #212121;
     
   }
   .new-square .border-inner-contener {
@@ -456,6 +498,7 @@ footer {
     left: 50%; /* Centre horizontalement */
     transform: translate(-50%, -50%); /* Assure le centrage parfait */
     justify-content: center;
+    align-items: center;
     overflow: hidden;     
     z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
     box-shadow: 
@@ -522,16 +565,26 @@ footer {
 .minus_button {
     background-color: green;
     right: 4vw;
+    box-shadow: 
+    
+    inset 1px -1px 0.1px rgb(0, 0, 0);
 }
 
 .full_screen_btn {
     background-color: orange;
     right: 2.5vw;
+    box-shadow: 
+    
+    inset 1px -1px 0.1px rgb(0, 0, 0);
+    
 }
 
 .close-btn {
     background-color: red;
     right: 1vw;
+    box-shadow: 
+    
+    inset 1px -1px 0.1px rgb(0, 0, 0);
 }
 
 .minus_button:hover {
@@ -548,15 +601,26 @@ footer {
   
 .top_tab {
     position: absolute; /* Permet de le fixer par rapport à la div parente */
-    top: 0.3vh; /* Positionne en haut de la div parente (ajustable selon besoin) */
-    left: 50%; /* Positionne à 50% de la largeur de la div parente */
-    transform: translateX(-50%); /* Ajuste de moitié la largeur de .top_tab pour le centrer */
-    width: 99%; /* Il prend presque toute la largeur de la div parente */
+    
+    
+    left: 50%;
+    transform: translate( -50%);
+    padding: 0;
+    width: 100%; /* Il prend presque toute la largeur de la div parente */
     height: 2.2vh; /* Sa hauteur est de 2.2% de la hauteur de la fenêtre (viewport height) */
     background-color: #000080; /* Couleur de fond */
-    font-size: 0.7vw;
+    font-size: 0.6vw;
     align-items: center; /* Centre verticalement */
-    display: flex; 
+    display: flex;
+    border-top-right-radius: 1vw;
+    border-top-left-radius: 1vw;
+    color: #ffffff;
+    justify-content: center; /* Centre le contenu horizontalement */
+    box-shadow: 
+    
+
+    inset 0px -1px 0px rgb(255, 255, 255),
+    inset 0px 1px 1px #ffffff81;
 }
 
 #inner_application6 {
@@ -566,7 +630,7 @@ footer {
     height: 100vh; /* Définit une hauteur explicite pour le parent */
   }
 .application_name{
-    left: 0.7vw;
+    left: 1vw;
     position: absolute;
     display: flex;
 }
@@ -590,21 +654,107 @@ footer {
     margin: 0.2vw;
   }
   
-  .header {
-    background-color: lightgray; /* Couleur de la section header */
-    height: 20%; /* Prend 20% de la hauteur totale */
-    width: 100%; /* S'étend sur toute la largeur */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .content {
     display: flex;
     flex-direction: row;
     height: 80%; /* Prend 80% de la hauteur totale */
     width: 100%; /* S'étend sur toute la largeur */
+    
 }
+
+.header {
+    position: relative;
+    background-color: #C0C0C0; /* Couleur de la section header */
+    height: 20%; /* Prend 20% de la hauteur totale */
+    width: 100%; /* S'étend sur toute la largeur */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1%;
+    box-shadow: 
+    
+    inset 1px 1px 0px rgba(0, 0, 0, 1),
+    inset -1px -1px 0px rgb(255, 255, 255);
+}
+
+.nav_button {
+    width: 3%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #C0C0C0;
+    color: #212121;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 20%;
+    box-shadow: 
+    inset 1px 1px 0px rgba(0, 0, 0, 1),
+    inset -1px -1px 0px rgba(255, 255, 255, 1);
+}
+
+
+
+#return_explorer{
+    margin-left: 2%;
+}
+
+
+/* Barre de recherche */
+
+
+
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    
+}
+
+.search_bar {
+    color: #212121;
+    background-color: #FFFFFF;
+    font-family: 'Press Start 2P', sans-serif;
+
+    
+    border-width: 1px;
+    caret-color:  #212121 ;
+    outline: none;
+    
+    width: 70%;
+    height: 100%;
+        
+        
+    
+    font-size: 50%;
+
+    box-shadow: 
+    inset 1px 1px 0px rgba(0, 0, 0, 1),
+    inset -1px -1px 0px rgba(255, 255, 255, 1);
+    
+    
+}
+
+.row_explorer {
+    width: 70%;
+    height: 20%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1%;
+
+    position: absolute; /* Permet de le positionner par rapport au parent */
+    bottom: 0; /* Le colle en bas */
+    left: 0; /* Le colle à gauche */
+    margin: 1%;
+}
+
+
+
 .folder {
     
     display: flex; 
@@ -615,7 +765,7 @@ footer {
     height: 30%; /* La hauteur du dossier */
     text-align: center; 
     border: 1px solid rgba(96, 96, 96, 0.473); 
-    border-radius: 5px; 
+    border-radius: 0px; 
     flex-shrink: 0; 
     cursor: pointer; /* Indique que c'est cliquable */
     
@@ -626,6 +776,7 @@ footer {
     height: 60%; /* L'image prend 70% de la hauteur de .folder */
     width: auto; /* La largeur s'ajuste automatiquement en gardant les proportions */
     margin: 5%; /* Espacement entre l'image et le texte */
+    pointer-events: none;
 }
 
 .folder p {
@@ -639,11 +790,13 @@ footer {
     overflow: hidden; /* Cache le texte si débordement */
     text-overflow: clip; /* Ajoute "..." si le texte est trop long */
     white-space: normal; /* Empêche de passer à la ligne */
+    pointer-events: none;
+    color: #212121;
 }
 
 /* Style des dossiers dans la liste */
 .list_folder {
-    background-color: #000080;
+    background-color: #C0C0C0;
     width: 20%;
     height: 100%;
     display: flex;
@@ -652,6 +805,10 @@ footer {
     overflow-y: auto; 
     font-size: 0.5vw;
     column-gap: 2%;
+    box-shadow: 
+    inset 1px 0px 0px rgba(0, 0, 0, 1);
+    color: #212121;
+   
     
 }
 
@@ -669,6 +826,9 @@ footer {
     row-gap: 1vh; 
     column-gap: 1vw; 
     overflow-y: auto;
+    box-shadow: 
+    inset 1px 0px 0px rgba(0, 0, 0, 1),
+    inset -1px -1px 0px rgba(255, 255, 255, 1);
 }
 
 .inner_folder{
@@ -684,6 +844,9 @@ footer {
 }
 
 
+
+
+
 .list_folder  .folder {
     
     display: flex; /* Aligne le contenu interne */
@@ -694,7 +857,7 @@ footer {
     height: 10%; /* Hauteur fixe pour chaque dossier */
     text-align: center; /* Centre le texte */
     border: 1px solid gray; /* Ajoute une bordure */
-    border-radius: 5px; /* Coins arrondis */
+    border-radius: 0px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
     cursor: pointer;
     
@@ -717,3 +880,53 @@ footer {
     white-space: nowrap;
     pointer-events: none;
 }
+
+.footer_file_explorer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5%;
+    background-color: #C0C0C0;
+    display: flex;
+    padding: 0;
+    border-top: 1px solid #FFFFFF;
+    align-items: center; /* Centre parfaitement les éléments en hauteur */
+    justify-content: flex-end; /* Aligne les éléments à droite */
+}
+
+.folder_name {
+    width: 40%;
+    height: 100%; /* Laisse la hauteur s'adapter */
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center; /* Assure l'alignement vertical du contenu */
+    
+    padding: 0;
+    margin-top: 1%;
+    font-size: 50%;
+    color: #212121;
+    box-shadow: 
+        inset 1px 1px 0px rgba(0, 0, 0, 1),
+        inset -1px -1px 0px rgba(255, 255, 255, 1);
+
+}
+
+.folder_name .folder_name_text {
+    width: 40%;
+    height: 80%; /* Laisse la hauteur s'adapter */
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu */
+    justify-content: flex-start; /* Aligne le contenu à droite */
+    font-size: 80%;
+    color: #212121;
+    margin-left: 2%; /* Ajoute une marge à droite (ajuste la valeur selon le besoin) */
+}
+
+.row_explorer{
+    width: 70%;
+    height: 20%;
+    display: flex;
+    justify-content: flex-start;
+}
+

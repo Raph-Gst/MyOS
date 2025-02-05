@@ -4,7 +4,7 @@ import * as t  from './tab.js';
 import * as d  from './scroll_bar.js';
 
 export function tab(){
-  t.enableDrag2("new-square");
+  t.enableDrag2("top_tab");
 
   const rectangularBar = document.querySelector('.rectangular-bar');
   const screen = document.querySelector('.screen');
@@ -25,11 +25,16 @@ export function tab(){
 
   export function openApp(rectangularBar, screen, width, height) {
    
-    document.addEventListener('click', function (e) {
+    document.addEventListener('dblclick', function (e) {
       let appDiv;
       let appID = e.target.id;
-      if (e.target.classList.contains('menu_item') && !appID.startsWith("shortcut_folder")) {
-        appID = e.target.firstElementChild?.id; 
+      let menuItem = e.target.closest('.menu_item');
+      if (menuItem && !menuItem.id.startsWith("shortcut_folder")) {
+        let menuLink = menuItem.querySelector('.menu_link'); // Récupère l'élément avec la classe "menu_link"
+        if (menuLink) {
+            appID = menuLink.id;
+            console.log("ID récupéré : " + appID);
+        }
         
         appDiv =  t.createDiv(`application_${appID}`, "application", " ", rectangularBar, `img/${appID}.png`, null, null);
         if (appDiv) {

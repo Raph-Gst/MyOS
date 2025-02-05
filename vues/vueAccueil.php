@@ -9,33 +9,32 @@
 
         <div id="swup" data-swup>
             <div class="menu_item">
+                <img src="img/github.png" class="hover_gif" >
                 <a class="menu_link" id="github">
-                    <img src="img/github.png" class="hover_gif" >
                     Github.exe
                 </a>
             </div>
             <div class="menu_item">
+                <img src="img/linkedin.png" class="hover_gif" >
                 <a class="menu_link" id="linkedin">
-                    <img src="img/linkedin.png" class="hover_gif" >
                     Linkedin.exe
                 </a>
             </div>
             <div class="menu_item" id="shortcut_folder_dev">
+                <img src="img/directory.png" class="hover_gif">
                 <a class="folder_shortcut" id="Documents_dev_shortcut">
-                    <img src="img/directory.png" class="hover_gif">
                     dev
                 </a>
             </div>
             <div class="menu_item" id="shortcut_folder_3D">
+                <img src="img/directory.png" class="hover_gif">
                 <a class="folder_shortcut" id="Documents_3D_shortcut">
-                    <img src="img/directory.png" class="hover_gif">
                     3D
                 </a>
             </div>
             <div class="menu_item" id="shortcut_folder_autre">
-                <a class="folder_shortcut" id="...">
-                    <img src="img/directory.png" class="hover_gif">
-          
+                <img src="img/directory.png" class="hover_gif">
+                <a class="folder_shortcut" id="...">         
                     Autres...
                 </a>
             </div>

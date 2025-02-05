@@ -45,10 +45,12 @@ export function handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen,
         const list_folder = e.target.parentElement;
         if(list_folder.classList.contains("inner_folder")){
           let innercontainer = list_folder.parentElement;
+          
           if (innercontainer.classList.contains("inner_folders")) { 
             const innercontainerID = innercontainer.id; 
             console.log(innercontainerID); 
             t.html_injector(`html/fileManagerStructure/${folderID}.html`, innercontainerID, null);
+            update_folder_name(folderID);
         } else {
             console.log("Le parent n'a pas la classe 'inner_folders'");
         }
@@ -58,13 +60,14 @@ export function handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen,
           let innercontainer = list_folder.parentElement.querySelector('.inner_folders');
           const innercontainerID = innercontainer.id;
           t.html_injector(`html/fileManagerStructure/${folderID}.html`, innercontainerID, null);
+          update_folder_name(folderID);
         }
       }
     });
   }
 
   export function openShortcut(rectangularBar, screen, width, height) {
-    document.addEventListener('click', function (e) {
+    document.addEventListener('dblclick', function (e) {
       let appID = e.target.id;
       
       
@@ -73,8 +76,8 @@ export function handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen,
           console.error('ID de l\'application est invalide');
           return;
         }
-        appID = e.target.firstElementChild?.id.replace('_shortcut', '');
-        
+        appID = e.target.children[1]?.id.replace('_shortcut', '');
+
         
         const dataDiv = "shortcut";
         const dataDiv2 = "folder";
@@ -87,4 +90,11 @@ export function handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen,
         handleShortcut(short, dataDiv, dataDiv2, rectangularBar, screen, width, height, path);
       }
     });
+  }
+
+  export function update_folder_name(text){
+    const derniersMots = text.split("/"); // Divise la chaîne
+    const dernierMot = derniersMots[derniersMots.length - 1]; // Récupère le dernier élément
+    document.querySelector(".folder_name").children[0].textContent = dernierMot;
+
   }
