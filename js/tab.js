@@ -1,10 +1,14 @@
+import { update_file_explorer , openFolders, openShortcut} from './file_explorer.js';
+
 let lastPosition = { x: 30, y: 30 };
 
 export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
-  const screenClass = document.querySelector('.screen');
-  const screen = screenClass.getBoundingClientRect();
-  const newSquare = createDiv(id, 'new-square', '', parentElement, backgroundImagePath, width, height);
   
+  const newSquare = createDiv(id, 'new-square', '', parentElement, backgroundImagePath, width, height);
+
+  if(!newSquare) return;
+
+
   let fullscreen = false;
   let minus = false;
 
@@ -21,8 +25,8 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
 
   const border_inner_contener = createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
   if(id != 'application6_tab') createDiv(id4, 'inner_contener', '', border_inner_contener, backgroundImagePath);
-  const scroll_bar = createDiv(null, 'scroll_bar', '', border_inner_contener, backgroundImagePath);
-  const scroll_thumb = createDiv(null, 'scroll_thumb', '', scroll_bar, backgroundImagePath);
+  //const scroll_bar = createDiv(null, 'scroll_bar', '', border_inner_contener, backgroundImagePath);
+  //const scroll_thumb = createDiv(null, 'scroll_thumb', '', scroll_bar, backgroundImagePath);
 
   
   
@@ -169,6 +173,53 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
     }
 }
 
+let explorerCount = 0; // Compteur global pour générer des IDs uniques
+
+export function createExplorerSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  explorerCount++; // Incrémenter pour obtenir un identifiant unique
+  const uniqueId = `file_explorer_${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+      <div class="header" id="header_${id}">
+        <div class="row_explorer" id="row_explorer_${id}">
+          <div id="return_explorer_${id}" class="nav_button"><</div>
+          <div class="search_bar" id="search_bar_${id}">
+            <div class="search_bar_text" id="search_bar_text_${id}"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="content_${id}">
+        <div class="list_folder" id="list_folder_${id}">
+          <div class="list_folder_contener" id="list_folder_contener_${id}"></div>
+        </div>
+        <div class="inner_folders" id="inner_folders_${id}"></div>
+      </div>
+
+      <div class="footer_file_explorer" id="footer_file_explorer_${id}">
+        <div class="folder_name" id="folder_name_${id}">
+          <div class="folder_name_text" id="folder_name_text_${id}"></div>
+        </div>
+      </div>
+    `;
+  }
+  update_file_explorer(id).then(() => {
+  openFolders(id);
+  OpenApplication(id);
+  openShortcut(id.replace('_tab', ''), id);
+  });
+  
+  return newSquare;
+}
+
+
 export function enableDrag2(classname) {
   document.addEventListener('pointerdown', function (e) {
       let item = e.target.closest(`.${classname}`);
@@ -260,12 +311,13 @@ export function IndexUpdate(){
     });
 }
 
-export function IndexClickApplication(classname, classname2) {
+export function IndexClickApplication(classname) {
   
 
   document.addEventListener('click', function (e) {
-      if (e.target.classList.contains('classname')) {
-          const appID = e.target.id;
+      if (e.target.classList.contains(classname)) {
+        let appID = e.target.id.replace(/_icon$/, '');
+        appID = appID.replace(/id_$/, '');
           const appID_tab = document.getElementById(`${appID}_tab`);
 
           if (appID_tab) {
@@ -328,4 +380,47 @@ export function change_id(parentElement, className, newId ) {
       targetElement.id = newId;
     }
   }
+}
+
+
+
+export function OpenApplication(id) {
+  const innerFoldersContainer = document.getElementById(`inner_folders_${id}`);
+  const width = '20vw';
+  const height = '20vh';
+  const screen = document.querySelector('.screen');
+  const rectangularBar = document.querySelector('.rectangular-bar');
+  
+  innerFoldersContainer.addEventListener('dblclick', function(e) {
+      if (e.target.id.includes('.')) {
+          const app = e.target.id;
+          const extension = app.split('.').pop(); // Récupère l'extension du fichier
+          const appName = app.replace(`.${extension}`, ''); // Supprime l'extension du nom du fichier
+          console.log(app + ' ' + ' ' + extension + ' ' + appName)
+
+          // Création du tab pour l'application
+          createSquare(
+              screen, 
+              `${appName}_tab`, 
+              `${appName}_icon`, 
+              `${appName}_border_inner_contener`, 
+              `${appName}_inner_contener`, 
+              '', 
+              width, 
+              height, 
+              `${app}`
+          );
+
+          // Ajout de l'icône de l'application avec l'image correspondant à l'extension
+          createDiv(
+              `${appName}_icon`, 
+              "application", 
+              '', 
+              rectangularBar, 
+              `img/${extension}.png`, // Utilisation de l'extension pour l'image
+              '', 
+              ''
+          );
+      }
+  });
 }

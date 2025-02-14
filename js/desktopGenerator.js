@@ -4,9 +4,8 @@ export async function generateDesktopMenu() {
     try {
         const response = await fetch('http://localhost:3000/files'); // Appel de l'API
         const items = await response.json(); // Récupération des données JSON
+        const screenDiv = document.querySelector('.screen'); 
 
-        const desktopMenu = document.createElement('div'); // Conteneur du menu
-        desktopMenu.id = 'desktop-menu'; 
 
         items.forEach(item => {
             // Création de l'élément du menu
@@ -34,12 +33,10 @@ export async function generateDesktopMenu() {
             menuItem.appendChild(anchor);
 
             // Ajout de l'élément dans le menu de bureau
-            desktopMenu.appendChild(menuItem);
+            screenDiv.appendChild(menuItem);
         });
 
-        // Ajout du menu dans la div "screen"
-        const screenDiv = document.querySelector('.screen'); 
-        screenDiv.appendChild(desktopMenu); 
+ 
 
     } catch (err) {
         console.error('Erreur lors de la génération du menu de bureau :', err);

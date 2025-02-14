@@ -717,40 +717,42 @@ input {
     box-sizing: border-box;
     
 }
-
 .search_bar {
     color: #212121;
     background-color: #FFFFFF;
     font-family: 'Press Start 2P', sans-serif;
-
     
     border-width: 1px;
-    caret-color:  #212121 ;
+    caret-color: #212121;
     outline: none;
     
     width: 70%;
     height: 100%;
-        
-        
     
     font-size: 50%;
-
+    
     box-shadow: 
-    inset 1px 1px 0px rgba(0, 0, 0, 1),
-    inset -1px -1px 0px rgba(255, 255, 255, 1);
-    
-    
+        inset 1px 1px 0px rgba(0, 0, 0, 1),
+        inset -1px -1px 0px rgba(255, 255, 255, 1);
+
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    padding: 0 5px; /* Ajoute un léger padding pour éviter que le texte touche les bords */
 }
 
 .search_bar .search_bar_text {
-    width: 100%;
-    height: 80%; /* Laisse la hauteur s'adapter */
+    flex-grow: 1; /* Prend tout l'espace disponible */
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+    overflow: hidden; /* Cache le texte qui dépasse */
+    text-overflow: ellipsis; /* Ajoute des "..." en cas de dépassement */
+    
     display: flex;
-    align-items: center; /* Centre verticalement le contenu */
-    justify-content: flex-start; /* Aligne le contenu à droite */
-    font-size: 100%;
+    align-items: center;
+    justify-content: flex-start; /* Alignement à droite */
+    
+    font-size: 60%;
     color: #212121;
-    margin-left: 2%; /* Ajoute une marge à droite (ajuste la valeur selon le besoin) */
+    direction: ltr; /* Permet d'afficher la fin du texte */
 }
 
 .row_explorer {
@@ -768,7 +770,7 @@ input {
 
 
 
-.folder {
+.inner_folders .folder {
     
     display: flex; 
     align-items: center; 
@@ -785,14 +787,14 @@ input {
     
 }
 
-.folder img {
+.inner_folders .folder img {
     height: 60%; /* L'image prend 70% de la hauteur de .folder */
     width: auto; /* La largeur s'ajuste automatiquement en gardant les proportions */
     margin: 5%; /* Espacement entre l'image et le texte */
     pointer-events: none;
 }
 
-.folder p {
+.inner_folders .folder p {
     
     font-size: clamp(0.1vw, 0.6vw, 0.75vw);
     width: 80%;
@@ -829,8 +831,18 @@ input {
 
 .list_folder_contener{
     background-color: #FFFFFF;
-    overflow-y: visible; 
-    overflow: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    padding: 0; 
+    overflow-y: hidden; 
+    font-size: 0.5vw;
+    column-gap: 2%;
+    box-shadow: 
+    inset 1px 0px 0px rgba(0, 0, 0, 1);
+    color: #212121;
+
 }
 /* Style des inner folders */
 .inner_folders {
@@ -867,7 +879,7 @@ input {
 
 
 
-.list_folder  .folder {
+.list_folder_contener  .folder {
     
     display: flex; /* Aligne le contenu interne */
     flex-direction: row;
@@ -876,29 +888,29 @@ input {
     width: 99%; /* Largeur fixe pour chaque dossier */
     height: 10%; /* Hauteur fixe pour chaque dossier */
     text-align: center; /* Centre le texte */
-    border: 1px solid rgb(255, 255, 255); /* Ajoute une bordure */
     border-radius: 0px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
     cursor: pointer;
     
 }
   
-.list_folder .folder img {
+.list_folder_contener .folder img {
     pointer-events: none;
     width: 15%; /* Taille de l'image ajustée pour correspondre au dossier */
     height: auto;
     margin: 5%; /* Espacement entre l'image et le texte */
 }
 
-.list_folder .folder p {
+.list_folder_contener .folder p {
     margin: 0; /* Supprime toute marge pour éviter des espaces inattendus */
-    width: 60%;
-    height: auto;
+    width: 60%; /* Ajustez selon vos besoins */
+    flex-grow: 1; /* Permet au paragraphe de prendre l'espace restant */
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     pointer-events: none;
+    font-size: 100%;
 }
 
 .footer_file_explorer {
@@ -938,7 +950,7 @@ input {
     display: flex;
     align-items: center; /* Centre verticalement le contenu */
     justify-content: flex-start; /* Aligne le contenu à droite */
-    font-size: 80%;
+    font-size: 70%;
     color: #212121;
     margin-left: 2%; /* Ajoute une marge à droite (ajuste la valeur selon le besoin) */
 }
@@ -952,4 +964,13 @@ input {
 
 details details {
     margin-left: 20px;
+}
+
+.space{
+    height: 0.2%;
+    width: 90%;
+    background-color: #212121;
+    margin: 1%;
+    
+    transform: translateX(5%);
 }
