@@ -436,6 +436,8 @@ footer {
     background-color: #C0C0C0; /* Exemple de couleur de fond (bleu) */
     border-top: 0.3vh solid #FFFFFF ;
     z-index: 1;
+    justify-content: center;
+    align-items: center;
 }
 .rectangular-bar {
     display: flex;
@@ -449,7 +451,7 @@ footer {
     background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position: center; /* Centre l'image dans la zone */
-    margin-left: 15vw;
+    
     margin-top: 0.2vh;
 }
 
@@ -740,6 +742,17 @@ input {
     
 }
 
+.search_bar .search_bar_text {
+    width: 100%;
+    height: 80%; /* Laisse la hauteur s'adapter */
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu */
+    justify-content: flex-start; /* Aligne le contenu à droite */
+    font-size: 100%;
+    color: #212121;
+    margin-left: 2%; /* Ajoute une marge à droite (ajuste la valeur selon le besoin) */
+}
+
 .row_explorer {
     width: 70%;
     height: 20%;
@@ -764,7 +777,7 @@ input {
     width: 22%; /* La largeur du dossier */
     height: 30%; /* La hauteur du dossier */
     text-align: center; 
-    border: 1px solid rgba(96, 96, 96, 0.473); 
+    border: 1px solid rgba(161, 161, 161, 0.473); 
     border-radius: 0px; 
     flex-shrink: 0; 
     cursor: pointer; /* Indique que c'est cliquable */
@@ -802,7 +815,7 @@ input {
     display: flex;
     flex-direction: column; 
     padding: 10px; 
-    overflow-y: auto; 
+    overflow-y: hidden; 
     font-size: 0.5vw;
     column-gap: 2%;
     box-shadow: 
@@ -812,9 +825,16 @@ input {
     
 }
 
+
+
+.list_folder_contener{
+    background-color: #FFFFFF;
+    overflow-y: visible; 
+    overflow: auto;
+}
 /* Style des inner folders */
 .inner_folders {
-    background-color: #C0C0C0; 
+    background-color:#FFFFFF;; 
     
     width: 80%; 
     height: 100%; 
@@ -856,7 +876,7 @@ input {
     width: 99%; /* Largeur fixe pour chaque dossier */
     height: 10%; /* Hauteur fixe pour chaque dossier */
     text-align: center; /* Centre le texte */
-    border: 1px solid gray; /* Ajoute une bordure */
+    border: 1px solid rgb(255, 255, 255); /* Ajoute une bordure */
     border-radius: 0px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
     cursor: pointer;
@@ -930,3 +950,6 @@ input {
     justify-content: flex-start;
 }
 
+details details {
+    margin-left: 20px;
+}

@@ -1,6 +1,30 @@
 {
   "dependencies": {
+    "@hotwired/turbo": "^8.0.12",
+    "cors": "^2.8.5",
     "dompurify": "^3.2.3",
-    "swup": "^4.6.1"
-  }
+    "express": "^4.21.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.12.0",
+    "swup": "^4.8.1"
+  },
+  "name": "teledemande",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbeubizbeub/teledemande.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbeubizbeub/teledemande/issues"
+  },
+  "homepage": "https://github.com/zbeubizbeub/teledemande#readme",
+  "type": "module"
 }
