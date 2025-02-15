@@ -6,7 +6,11 @@
     "express": "^4.21.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.12.0",
-    "swup": "^4.8.1"
+    "swup": "^4.8.1",
+    "three": "^0.173.0",
+    "gltfloader": "github:codeurdenuit/GLTFLoader"
+
+
   },
   "name": "teledemande",
   "description": "",
@@ -26,5 +30,9 @@
     "url": "https://github.com/zbeubizbeub/teledemande/issues"
   },
   "homepage": "https://github.com/zbeubizbeub/teledemande#readme",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "vite": "^6.1.0"
+  }
+
 }

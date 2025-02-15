@@ -35,6 +35,12 @@ export async function generateDesktopMenu() {
             // Ajout de l'élément dans le menu de bureau
             screenDiv.appendChild(menuItem);
         });
+        setInterval(updateDateTime, 1000);
+
+
+        updateDateTime();
+
+
 
  
 
@@ -42,4 +48,26 @@ export async function generateDesktopMenu() {
         console.error('Erreur lors de la génération du menu de bureau :', err);
     }
 }
+
+function updateDateTime() {
+    const now = new Date();
+  
+    // Formater l'heure
+    const formattedTime = now.toLocaleTimeString('fr-FR', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit' 
+    });
+  
+    // Formater la date
+    const formattedDate = now.toLocaleDateString('fr-FR', { 
+
+      day: '2-digit', 
+      month: '2-digit', 
+      year: 'numeric' 
+    });
+
+    document.getElementById("datetime").innerHTML = `${formattedTime}<br>${formattedDate}`;
+  }
+
 

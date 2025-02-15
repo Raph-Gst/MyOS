@@ -428,21 +428,43 @@ footer {
 }
 
 .rectangular-bar {
-    position: fixed;          /* Fixe l'élément à une position spécifique sur l'écran */
-    bottom: 0vh;             /* Place la div à 15vh du bas de l'écran */
-    left: 0;                  /* Commence à la bordure gauche de l'écran */
-    width: 100%;              /* Prend 100% de la largeur de l'écran */
-    height: 3vw;             /* Hauteur de la div (par exemple, 10vh pour qu'elle soit bien visible) */
-    background-color: #C0C0C0; /* Exemple de couleur de fond (bleu) */
-    border-top: 0.3vh solid #FFFFFF ;
+    position: fixed;          
+    bottom: 0vh;             
+    left: 0;                  
+    width: 100%;              
+    height: 3vw;             
+    background-color: #C0C0C0; 
+    border-top: 0.3vh solid #FFFFFF;
     z-index: 1;
+    display: flex;
+    gap: 0.5vw;  
+    align-items: center;
+    padding: 0 1vw;
+}
+
+.datetime {
+    position: absolute;
+    right: 5vw; /* Distance depuis le bord droit */
+    bottom: 50%;
+    transform: translateY(50%);
+    width: 8vw;
+    height: auto;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #212121;
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: right;
+    
+    border-radius: 5px;
+    line-height: 1.5; /* Espacement entre l'heure et la date */
+    pointer-events: none; /* Rendre la div insensible aux interactions */
+    font-size: 0.8vw;
 }
-.rectangular-bar {
-    display: flex;
-    gap: 0.5vw; 
-  }
+
   
   .start-menu {
     width: 3vw;
@@ -451,15 +473,16 @@ footer {
     background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     background-position: center; /* Centre l'image dans la zone */
-    
+    margin-left:15vw; 
     margin-top: 0.2vh;
+    margin-right: 1vw;
 }
 
 .application, .shortcut {
     width: 3vw;
     height: 3vw; /* Hauteur égale à la largeur */
     margin-top: 0.2vh;
-    margin-left: 15px;
+    margin-left: 0.1vw;
     cursor: pointer;
     
     z-index: 1;
@@ -973,4 +996,13 @@ details details {
     margin: 1%;
     
     transform: translateX(5%);
+}
+
+.content{
+    width: 100%;
+    height: 100%;
+}
+canvas{
+    height: 100%;
+    width: 100%;
 }

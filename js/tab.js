@@ -1,6 +1,12 @@
 import { update_file_explorer , openFolders, openShortcut} from './file_explorer.js';
 
-let lastPosition = { x: 30, y: 30 };
+import { load3DModel } from './meshHandler.js'; // Assurez-vous que le chemin est correct
+
+
+
+let lastPosition = { x: 20, y: 20 };
+
+
 
 export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
   
@@ -16,11 +22,11 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   newSquare.style.left = `${lastPosition.x + 3}vw`; 
   newSquare.style.top = `${lastPosition.y + 3}vh`; 
 
-  lastPosition.x += 3; 
-  lastPosition.y += 3; 
+  lastPosition.x += 1; 
+  lastPosition.y += 2; 
 
-  if (lastPosition.x > 80) lastPosition.x = 0; 
-  if (lastPosition.y > 80) lastPosition.y = 0;
+  if (lastPosition.x > 25) lastPosition.x = 20+1; 
+  if (lastPosition.y > 25) lastPosition.y = 20;
   const top_tab = createDiv(null, 'top_tab', '', newSquare, backgroundImagePath);
 
   const border_inner_contener = createDiv(id3, 'border-inner-contener', '', newSquare, backgroundImagePath, null, null);
@@ -219,6 +225,131 @@ export function createExplorerSquare(parentElement, id, id2, id3, id4, backgroun
   return newSquare;
 }
 
+export function createPictureSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+
+
+      <div class="content" id="content_${id}">
+
+      </div>
+
+      <div class="footer_file_explorer" id="footer_file_explorer_${id}">
+
+      </div>
+    `;
+  }
+
+  return newSquare;
+}
+
+export function createMusicSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+
+
+      <div class="content" id="content_${id}">
+
+      </div>
+
+      <div class="footer_file_explorer" id="footer_file_explorer_${id}">
+
+      </div>
+    `;
+  }
+
+  return newSquare;
+}
+
+export function createTextSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+      <div class="content" id="content_${id}">
+
+      </div>
+    `;
+  }
+
+  return newSquare;
+}
+
+export function createPDFSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+      <div class="content" id="content_${id}">
+
+      </div>
+    `;
+  }
+
+  return newSquare;
+}
+
+export function create3DSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+
+
+      <div class="content" id="content_${id}">
+
+      </div>
+
+    `;
+  }
+
+  const modelPath = 'path/to/your/model.glb'; // Remplacez par le chemin de votre modèle
+  const containerDiv = document.getElementById(`content_${id}`);
+  // Remplacez par l'ID de votre div
+  console.log(id);
+  load3DModel(containerDiv);
+  
+  return newSquare;
+}
 
 export function enableDrag2(classname) {
   document.addEventListener('pointerdown', function (e) {
@@ -311,28 +442,32 @@ export function IndexUpdate(){
     });
 }
 
-export function IndexClickApplication(classname) {
-  
+export function IndexClickApplication(classname, rectangularBar) {
+  rectangularBar.addEventListener('click', function (e) {
+    if (e.target.classList.contains(classname)) {
+      let appID = e.target.id.replace(/_icon$/, '');
+      appID = appID.replace('id_', '');
 
-  document.addEventListener('click', function (e) {
-      if (e.target.classList.contains(classname)) {
-        let appID = e.target.id.replace(/_icon$/, '');
-        appID = appID.replace(/id_$/, '');
-          const appID_tab = document.getElementById(`${appID}_tab`);
+      let appID_tab = document.getElementById(`${appID}_tab`);
+      let file_explorer_ID_tab = document.getElementById(`file_explorer_${appID}_tab`);
 
-          if (appID_tab) {
-              const allTabs = document.querySelectorAll('.new-square'); // Récupère toutes les divs avec la classe
+      console.log(file_explorer_ID_tab);
 
-              // Réinitialise le z-index de toutes les divs
-              allTabs.forEach(tab => tab.style.zIndex = 1);
+      // Si au moins un des deux éléments existe
+      if (appID_tab || file_explorer_ID_tab) {
+        const allTabs = document.querySelectorAll('.new-square');
 
-              // Met le z-index de la div sélectionnée à 10
-              appID_tab.style.zIndex = 10;
-          }
+        allTabs.forEach(tab => tab.style.zIndex = 1);
+
+        if (file_explorer_ID_tab) {
+          file_explorer_ID_tab.style.zIndex = 10;
+        } else if (appID_tab) {
+          appID_tab.style.zIndex = 10;
+        }
       }
+    }
   });
 }
-
 
 import DOMPurify from 'https://cdn.jsdelivr.net/npm/dompurify@3.0.1/dist/purify.es.min.js';
 
@@ -371,8 +506,6 @@ export function html_injector(path, id, className, newId) {
   });
 }
 
-
-
 export function change_id(parentElement, className, newId ) {
   if (parentElement && className && newId) {
     const targetElement = parentElement.querySelector(`.${className}`);
@@ -382,12 +515,10 @@ export function change_id(parentElement, className, newId ) {
   }
 }
 
-
-
 export function OpenApplication(id) {
   const innerFoldersContainer = document.getElementById(`inner_folders_${id}`);
-  const width = '20vw';
-  const height = '20vh';
+  const width = '30vw';
+  const height = '30vh';
   const screen = document.querySelector('.screen');
   const rectangularBar = document.querySelector('.rectangular-bar');
   
@@ -398,9 +529,8 @@ export function OpenApplication(id) {
           const appName = app.replace(`.${extension}`, ''); // Supprime l'extension du nom du fichier
           console.log(app + ' ' + ' ' + extension + ' ' + appName)
 
-          // Création du tab pour l'application
-          createSquare(
-              screen, 
+          if(extension == "png"){
+            createPictureSquare(screen, 
               `${appName}_tab`, 
               `${appName}_icon`, 
               `${appName}_border_inner_contener`, 
@@ -408,8 +538,63 @@ export function OpenApplication(id) {
               '', 
               width, 
               height, 
-              `${app}`
-          );
+              `${app}`);
+
+          }else if(extension == "blend"){
+            create3DSquare(screen, 
+              `${appName}_tab`, 
+              `${appName}_icon`, 
+              `${appName}_border_inner_contener`, 
+              `${appName}_inner_contener`, 
+              '', 
+              width, 
+              height, 
+              `${app}`);
+          }else if(extension == "pdf"){
+            createPDFSquare(screen, 
+              `${appName}_tab`, 
+              `${appName}_icon`, 
+              `${appName}_border_inner_contener`, 
+              `${appName}_inner_contener`, 
+              '', 
+              width, 
+              height, 
+              `${app}`);
+          }else if(extension == "txt"){
+            createTextSquare(screen, 
+              `${appName}_tab`, 
+              `${appName}_icon`, 
+              `${appName}_border_inner_contener`, 
+              `${appName}_inner_contener`, 
+              '', 
+              width, 
+              height, 
+              `${app}`);
+          }else if(extension == "mp3"){
+            createMusicSquare(screen, 
+              `${appName}_tab`, 
+              `${appName}_icon`, 
+              `${appName}_border_inner_contener`, 
+              `${appName}_inner_contener`, 
+              '', 
+              width, 
+              height, 
+              `${app}`);
+          }
+          else{
+              createSquare(
+                screen, 
+                `${appName}_tab`, 
+                `${appName}_icon`, 
+                `${appName}_border_inner_contener`, 
+                `${appName}_inner_contener`, 
+                '', 
+                width, 
+                height, 
+                `${app}`
+            );
+            console.error("probleme avec " + extension);
+          } 
 
           // Ajout de l'icône de l'application avec l'image correspondant à l'extension
           createDiv(

@@ -20,7 +20,7 @@ export function tab() {
     if (screen && rectangularBar) {
       observer.disconnect(); 
       openFiles(rectangularBar, screen, width, height);
-      t.IndexClickApplication('application');
+      t.IndexClickApplication('application', rectangularBar);
     }
   });
 
@@ -34,12 +34,87 @@ export function openFiles(rectangularBar, screen, width, height) {
 
     if (menuItem) {
       
-      if (menuItem.id.includes(".")) {
-        console.log("La chaîne contient un point.");
-        t.createSquare(screen, `${menuItem.id.replace('.', '')}_tab`, `${menuItem.id.replace('.', '')}_icon`, `${menuItem.id}_border_inner_contener`, `${menuItem.id}_inner_contener`, '', width, height, `${menuItem.id}`);
-        t.createDiv(`${menuItem.id.replace('.', '')}_icon`, "application", '', rectangularBar, `img/${menuItem.id.replace('.exe', '')}.png`, '', '');
-        
-      }
+ if (menuItem.id.includes(".")) {
+    console.log("La chaîne contient un point.");
+    
+    // Extraire la partie après le point
+    const extension = menuItem.id.split(".")[1]; // Cela récupère la partie après le point
+    const appName = menuItem.id.replace('.', ''); // Remplacer le point pour obtenir le nom de l'application
+    const app = menuItem.id; // Utiliser l'ID d'origine pour passer à la fonction
+
+    // Vérifier l'extension et appeler la fonction appropriée
+    if (extension === "png") {
+        t.createPictureSquare(screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+    } else if (extension === "blend") {
+        t.create3DSquare(screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+    } else if (extension === "pdf") {
+        t.createPDFSquare(screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+    } else if (extension === "txt") {
+        t.createTextSquare(screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+    } else if (extension === "mp3") {
+        t.createMusicSquare(screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+    } else {
+        t.createSquare(
+            screen, 
+            `${appName}_tab`, 
+            `${appName}_icon`, 
+            `${appName}_border_inner_contener`, 
+            `${appName}_inner_contener`, 
+            '', 
+            width, 
+            height, 
+            `${app}`
+        );
+        console.log("ouvert : " + app);
+    }
+    t.createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${app.replace('.exe', '')}.png`, '', '');
+}
+    
       else{
         
         t.createExplorerSquare(screen,`${menuItem.id}_tab`, `id_${menuItem.id}_icon`, `id_${menuItem.id}_border_inner_contener`, `id_${menuItem.id}_inner_contener`, '', width, height, `file explorer`);
@@ -50,6 +125,8 @@ export function openFiles(rectangularBar, screen, width, height) {
     }
   });
 }
+
+
 
 
 

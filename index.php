@@ -11,6 +11,7 @@ require_once('modele/modele.php');
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
     
 </head>
 <body>
@@ -52,6 +53,6 @@ require_once('modele/modele.php');
         Your browser does not support the video tag.
     </video>
     <script type="module" src="js/main.js" ></script>
-    <script type="module" src="js/desktopGenerator.js"></script>
+
 </body>
 </html>
