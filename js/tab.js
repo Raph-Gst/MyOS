@@ -1,4 +1,4 @@
-import { update_file_explorer , openFolders, openShortcut} from './file_explorer.js';
+import { update_file_explorer , openFolders, openShortcut,  loadTextFile} from './applicationHandler.js';
 
 import { load3DModel } from './meshHandler.js'; // Assurez-vous que le chemin est correct
 
@@ -267,7 +267,7 @@ export function createMusicSquare(parentElement, id, id2, id3, id4, backgroundIm
 
 
       <div class="content" id="content_${id}">
-
+        
       </div>
 
       <div class="footer_file_explorer" id="footer_file_explorer_${id}">
@@ -292,11 +292,12 @@ export function createTextSquare(parentElement, id, id2, id3, id4, backgroundIma
   if (borderInnerContainer) {
     borderInnerContainer.innerHTML = `
       <div class="content" id="content_${id}">
-
+        <textarea id="text_${id}" class="text_area"></textarea>
+        
       </div>
     `;
   }
-
+  loadTextFile(id)
   return newSquare;
 }
 
@@ -313,7 +314,7 @@ export function createPDFSquare(parentElement, id, id2, id3, id4, backgroundImag
   if (borderInnerContainer) {
     borderInnerContainer.innerHTML = `
       <div class="content" id="content_${id}">
-
+        <iframe src="img/${id.replace("pdf_tab", '')}.pdf" width="100%" height="100%"></iframe>
       </div>
     `;
   }
@@ -526,7 +527,7 @@ export function OpenApplication(id) {
       if (e.target.id.includes('.')) {
           const app = e.target.id;
           const extension = app.split('.').pop(); // Récupère l'extension du fichier
-          const appName = app.replace(`.${extension}`, ''); // Supprime l'extension du nom du fichier
+          const appName = app.replace(`.`, ''); // Supprime l'extension du nom du fichier
           console.log(app + ' ' + ' ' + extension + ' ' + appName)
 
           if(extension == "png"){
@@ -595,17 +596,14 @@ export function OpenApplication(id) {
             );
             console.error("probleme avec " + extension);
           } 
+          if(extension !='exe'){
+            createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${extension}.png`, '', '');
+          }
+          else {
+            createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${appName.replace(`${extension}`,'')}.png`, '', '');
+          }
 
-          // Ajout de l'icône de l'application avec l'image correspondant à l'extension
-          createDiv(
-              `${appName}_icon`, 
-              "application", 
-              '', 
-              rectangularBar, 
-              `img/${extension}.png`, // Utilisation de l'extension pour l'image
-              '', 
-              ''
-          );
       }
   });
 }
+

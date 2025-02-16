@@ -39,9 +39,9 @@ export function openFiles(rectangularBar, screen, width, height) {
     
     // Extraire la partie après le point
     const extension = menuItem.id.split(".")[1]; // Cela récupère la partie après le point
-    const appName = menuItem.id.replace('.', ''); // Remplacer le point pour obtenir le nom de l'application
+    const appName = menuItem.id.replace(`.`, '');// Remplacer le point pour obtenir le nom de l'application
     const app = menuItem.id; // Utiliser l'ID d'origine pour passer à la fonction
-
+    console.log(app + ' ' + ' ' + extension + ' ' + appName)
     // Vérifier l'extension et appeler la fonction appropriée
     if (extension === "png") {
         t.createPictureSquare(screen, 
@@ -112,7 +112,13 @@ export function openFiles(rectangularBar, screen, width, height) {
         );
         console.log("ouvert : " + app);
     }
-    t.createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${app.replace('.exe', '')}.png`, '', '');
+    if(extension !='exe'){
+      t.createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${extension}.png`, '', '');
+    }
+    else {
+      t.createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${appName.replace(`${extension}`,'')}.png`, '', '');
+    }
+    
 }
     
       else{
