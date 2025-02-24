@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 html {
     scroll-behavior: smooth;
-    cursor: default;
+
     user-select: none;
 
 }
@@ -35,21 +35,14 @@ html.is-animating .transition-video {
     opacity: 1;
 }
 
-/*.ciel{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+.custom_cursor{
+    position: absolute;
+    background-image: url("../img/Cursor101.png");
+    background-size: 100% 100%;
+    width: 32px;
+    height: 32px;
     pointer-events: none;
-    margin: 0;
-    padding: 0;
-    
-
-}*/
+}
 
 .buttons {
 
@@ -109,20 +102,37 @@ html.is-animating .transition-video {
     position: fixed;
     z-index: 9998;
     pointer-events: none;
+    
 
 }
+
+@keyframes lightUp {
+    0% { filter: brightness(1.1); }
+    50% { filter: brightness(1.12); }
+    100% { filter: brightness(1.1); }
+}
+
+
+
 
 .tele{
-    object-fit: cover;
+
     padding: 0px;
     margin: 0px;
-    width: 100%;
-    height: 100%;
-    position: fixed;
+    width:86vw;               /* Largeur de 60% de la largeur de la fenêtre */
+    height: 77vh;              /* Hauteur de 40% de la hauteur de la fenêtre */
+           /* Centre la div horizontalement */
+    position: absolute;        /* Permet de la positionner précisément */
+    top: 46%;                  /* Positionne la div au centre verticalement */
+    left: 50.5%;                 /* Positionne la div au centre horizontalement */
+    transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
+    
     z-index: 9997;
     pointer-events: none;
-    opacity: 100%;
+    opacity: 1;
+    animation: lightUp 2s infinite alternate;
 }
+
 
 .transparent-video{
     position: fixed;
@@ -134,9 +144,11 @@ html.is-animating .transition-video {
     transform: translate(-50%, -50%);
     z-index: 9996;
     pointer-events: none;
+    cursor: none;
     margin: 0;
     padding: 0;
     opacity: 5%;
+    animation: lightUp 2s infinite alternate;
 }
 
 #start {
@@ -252,6 +264,7 @@ footer {
     max-height: 10%;
     min-height: 10%;
     display: flex;
+    animation: lightUp 2s infinite alternate;
 }
 
 .start_menu a {
@@ -260,6 +273,7 @@ footer {
     padding: 10px 20px;
     margin: 5px 0;
     text-align: center;
+    animation: lightUp 2s infinite alternate;
     
 }
 .screen {
@@ -271,7 +285,30 @@ footer {
     left: 50.5%;                 /* Positionne la div au centre horizontalement */
     transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
     overflow: hidden;            /* Si le contenu dépasse, ajoute des barres de défilement */
-    cursor: url('../img/Cursor101.png'), pointer;
+    cursor: none;
+    background-image: url('../img/screenBackground2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    animation: lightUp 2s infinite alternate;
+    
+}
+
+.screen_start {
+    width:86vw;               /* Largeur de 60% de la largeur de la fenêtre */
+    height: 77vh;              /* Hauteur de 40% de la hauteur de la fenêtre */
+    margin: 0 auto;            /* Centre la div horizontalement */
+    position: absolute;        /* Permet de la positionner précisément */
+    top: 46%;                  /* Positionne la div au centre verticalement */
+    left: 50.5%;                 /* Positionne la div au centre horizontalement */
+    transform: translate(-50%, -50%);  /* Ajuste la div pour qu'elle soit parfaitement centrée */
+    overflow: hidden;            /* Si le contenu dépasse, ajoute des barres de défilement */
+    cursor: none;
+    background-image: url('../img/screenBackground2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    animation: lightUp 2s infinite alternate;
+    
 }
 
 
@@ -282,13 +319,19 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;  /* Centrer l'image et le texte */
-    margin: 5px 0;
+
     width: 8vw;   /* Largeur réactive en fonction de la largeur de la fenêtre */
     height: 8vh;  /* Hauteur réactive en fonction de la hauteur de la fenêtre */
 
-    padding: 5px;
+    padding: 0;
     box-sizing: border-box; /* Inclut le padding dans la taille totale */
-    
+    animation: lightUp 2s infinite alternate;
+}
+
+
+.menu_item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5vw;
 }
 
 .menu_item a {
@@ -325,7 +368,7 @@ footer {
     border: 1px solid rgba(96, 96, 96, 0.473); 
     border-radius: 5px; 
     flex-shrink: 0; 
-    cursor: pointer; /* Indique que c'est cliquable */
+
     padding: 0;
     margin: 0;
 }
@@ -369,20 +412,16 @@ footer {
 }
 
 
-.landing-start {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 15%;
-    left: 0;
-    height: 100vh; /* 100% de la hauteur de la vue */
-    width: 100vw; /* 100% de la largeur de la vue */
-}
+
+
+
 
 .landing-start-container {
+    position: relative; /* Changez de 'absolute' à 'relative' pour l'alignement correct */
+    top: 0; /* Enlevez le positionnement décalé */
     text-align: center;
 }
+
 
 .landing-start-text {
     margin: 0;
@@ -403,8 +442,10 @@ footer {
     font-family: inherit;
     color: inherit;
     font: inherit;
-    cursor: pointer;
+
     text-shadow: 3px 3px 4px #21285d,0 0 16px rgba(191,191,191,.56);
+
+    cursor: none;
     
 }
 
@@ -420,6 +461,63 @@ footer {
 
     animation: blinker 1s linear infinite;
 }
+.landing-profile-container {
+    position: relative; /* Gardez cette propriété pour que les éléments internes soient positionnés relativement */
+    display: flex;
+    flex-direction: column; /* Assurez-vous que cela est défini pour empiler les éléments verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    margin-bottom: 10px; /* Ajoute un espace entre le profil et le bouton */
+    gap: 10px; /* Ajoute un espace entre les enfants pour éviter le chevauchement */
+}
+.container_profile {
+    position: fixed; /* Changez de 'relative' à 'fixed' pour le positionnement par rapport à la fenêtre du navigateur */
+    bottom: 0; /* Positionne le conteneur en bas de la fenêtre */
+    left: 50%; /* Aligne le conteneur au centre de la fenêtre */
+    transform: translateX(-50%); /* Déplace le conteneur vers la gauche de 50% de sa largeur pour le centrer */
+    background-color: #EFEFEF;
+    height: 60vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre les enfants horizontalement */
+
+    z-index: 1; /* Assurez-vous que le conteneur est au-dessus des autres éléments */
+    color: #212121;
+
+}
+
+
+
+
+.profile_image_contener {
+    width: 10vw; /* Gardez cette largeur */
+    height: 10vw; /* Gardez cette hauteur */
+    background-image: url("../img/profile.png");
+    background-size: cover;
+    border: 5px solid #EFEFEF;
+    
+    margin: 4vh; /* Ajoute un espace entre l'image et le texte */
+    box-shadow: 
+        1px 1px 0px rgba(0, 0, 0, 1),
+        -1px -1px 0px rgb(130, 130, 130),
+        inset 2px 2px 0px rgba(0, 0, 0, 1),
+        inset -2px -2px 0px rgb(255, 255, 255);
+    z-index: 2; /* Pour s’assurer que l’image est bien au-dessus */
+    display: flex; /* Ajouté pour centrer le contenu s'il y en a */
+    align-items: center; /* Centre le contenu s'il y en a */
+    justify-content: center; /* Centre le contenu s'il y en a */
+}
+
+.profile_name {
+    position: relative; /* Changez de 'absolute' à 'relative' */
+    margin-top: 10px; /* Ajoute un espace au-dessus du texte */
+    font-size: 1vw;
+    text-align: center;
+    text-shadow: 0px 0px 2px #18335c,0 0 1px rgb(255, 255, 255);
+    z-index: 1; /* Assure que le texte ne chevauche pas l’image */
+    
+}
+
 
 @keyframes blinker {
     50%{
@@ -429,68 +527,298 @@ footer {
 
 .rectangular-bar {
     position: fixed;          
-    bottom: 0vh;             
-    left: 0;                  
-    width: 100%;              
-    height: 3vw;             
-    background-color: #C0C0C0; 
-    border-top: 0.3vh solid #FFFFFF;
-    z-index: 1;
+    bottom: -2vw; /* Cachée sous l'écran */
+    left: 50%;        
+    width: 80%;              
+    height: 8%;             
+    background-color: #EFEFEF; 
+
+
     display: flex;
     gap: 0.5vw;  
     align-items: center;
     padding: 0 1vw;
+    z-index: 50;
+    box-shadow: 
+    
+    1px 1px 0px rgba(0, 0, 0, 1),
+    -1px -1px 0px rgb(250, 255, 238);
+    transform: translateX(-50%); /* Centrage */
+    opacity: 0.5; /* Semi-transparent pour indiquer sa présence */
+    
+    transition: bottom 0.3s ease-out, opacity 0.3s ease-out; /* Animation fluide */
+    animation: lightUp 2s infinite alternate;
+
 }
+
+.rectangular-bar:hover {
+    bottom: 0; /* Remonte à sa position normale */
+    opacity: 1; /* Devient complètement visible */
+}
+
+
+
+.rectangular-bar-top {
+    position: fixed;          
+    top: 0.4vh;             
+    left: 0;                  
+    width: 100%;              
+    height: 3%;             
+    background-color: #EFEFEF; 
+    border: 0.3vh solid #212121;
+
+    display: flex;
+    gap: 0.5vw;  
+    align-items: center;
+    justify-content: space-between; /* Écarte les éléments aux extrémités */
+    padding: 0 1vw;
+    z-index: 50;
+    animation: lightUp 2s infinite alternate;
+}
+
+.logo-os {
+    position: absolute;
+    width: 1.5%; 
+    height: auto;
+    left: 1vw;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
 
 .datetime {
     position: absolute;
-    right: 5vw; /* Distance depuis le bord droit */
-    bottom: 50%;
-    transform: translateY(50%);
-    width: 8vw;
+    right: 0; /* Distance depuis le bord droit */
+    top: 55%;
+    transform: translateY(-50%);
+    width: 20vw;
     height: auto;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 10%;
+  
     color: #212121;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     text-align: right;
     
-    border-radius: 5px;
-    line-height: 1.5; /* Espacement entre l'heure et la date */
+
+    line-height: 1.1; /* Espacement entre l'heure et la date */
     pointer-events: none; /* Rendre la div insensible aux interactions */
-    font-size: 0.8vw;
+    font-size: 0.6vw;
+    text-shadow: 0px 0px 2px #18335c,0 0 1px rgb(255, 255, 255);
 }
 
+
+.name {
+    position: absolute;
+    left: 3.5vw; /* Distance depuis le bord droit */
+    top: 55%;
+    transform: translateY(-50%);
+    width: 10vw;
+    height: auto;
+    font-size: 10%;
   
-  .start-menu {
-    width: 3vw;
-    height: 3vw; /* Hauteur égale à la largeur */
-    background-image: url('../img/world-4.png'); /* Chemin de l'image */
-    background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
-    background-repeat: no-repeat; /* Empêche la répétition de l'image */
-    background-position: center; /* Centre l'image dans la zone */
-    margin-left:15vw; 
+    color: #212121;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    
+
+    line-height: 1.1; /* Espacement entre l'heure et la date */
+    pointer-events: none; /* Rendre la div insensible aux interactions */
+    font-size: 0.6vw;
+    text-shadow: 0px 0px 2px #18335c,0 0 1px rgb(255, 255, 255);
+    
+}
+
+.start-menu {
+    display: flex;
+    align-items: center; /* Aligne l’image et le texte verticalement */
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    width: 7.5vw;
+    height: 5.5vh;
+
+
+    margin-left: 1vw;
     margin-top: 0.2vh;
     margin-right: 1vw;
+    box-shadow: 
+    
+    1px 1px 0px rgba(0, 0, 0, 1),
+    -1px -1px 0px rgb(130, 130, 130),
+    0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
+
+    outline: none;
+    flex-direction: row;
+    padding: 0 0.5vw; /* Ajoute un peu d'espace intérieur */
+    animation: lightUp 2s infinite alternate;
+    cursor: none;
+    
+
 }
+
+.start-menu-logo {
+    width: 3vw;
+    height: auto;
+    margin-right: 0.5vw; /* Espace entre l’image et le texte */
+    margin-top: 0.25vw; /* Espace entre l’image et le texte */
+    
+}
+
+.start-menu-text {
+    font-size: 1vw; /* Taille du texte relative à l’écran */
+    font-weight: bold;
+    color: #212121;
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+
+/* Style du menu déroulant */
+.dropdown-content {
+    display: none; /* Caché par défaut */
+    position: absolute;
+    left: 1vw; /* Aligné avec le bouton */
+    bottom: 6.2vh; /* Juste en dessous du bouton */
+    background-color: #EFEFEF;
+    border: 1px solid #212121;
+    border-bottom: 0px;
+    width: 20vw;
+    height: 30vh;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
+    padding: 10px;
+    
+
+}
+
+#shutdown {
+    color: #212121;
+    position: absolute;
+    bottom: 5%; /* Distance du bas */
+    right: 5%; /* Distance de la droite */
+    font-size: 0.5vw;
+    height: 2vw;
+    width: 2vw;
+    padding: 0.3vw;
+    box-shadow: 
+    
+    1px 1px 0px rgba(0, 0, 0, 1),
+    -1px -1px 0px rgb(130, 130, 130),
+    0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
+
+}
+
+#shutdown img {
+    width: 100%;
+    height: auto;
+
+}
+
+
+
+/* Animation d'apparition */
+.dropdown-content.show {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+   
+}
+
+.recent_files {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start ;
+    justify-self: flex-start ;
+    
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    height: 60%;
+    width: 80%;
+    
+    background-color: #FFFFFF;
+    
+    padding: 10px;
+    row-gap: 1vh;
+    column-gap: 0.5vw;
+    overflow-y: scroll;
+    box-shadow: 
+        inset 1px 0px 0px rgba(0, 0, 0, 1),
+        inset -1px -1px 0px rgba(255, 255, 255, 1);
+}
+
+
+
+.recent_files .menu_item {
+    display: flex;
+    position: static;
+    flex-direction: column;
+    
+    
+    width: 25%; /* Largeur du dossier */
+    height: 30%; /* Hauteur du dossier */
+
+    border: 1px solid rgba(161, 161, 161, 0.473);
+    border-radius: 0px;
+    flex-shrink: 0;
+    text-align: left;
+    /* Positionner en haut à gauche */
+    margin: 0; /* Supprime tout espace autour */
+}
+
+.recent_files .menu_item:hover {
+    background-color: rgba(0, 0, 0, 0.322);
+    padding: 0.01vw;
+}
+
+.recent_files .menu_item img{
+    width: 50%;
+    height: auto;
+}
+
+.recent_files .menu_item a {
+    color: #212121;
+    text-shadow: 1px 1px 2px #21285d, 0 0 5px rgba(191,191,191,.56);
+
+    /* Aligner le texte à gauche */
+    text-align: left;
+
+    /* Empêcher le texte de passer à la ligne suivante */
+    white-space: nowrap;
+
+    /* Ajouter des points de suspension si le texte dépasse */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* Assurez-vous que l'élément prend la largeur complète de son conteneur */
+    width: 100%;
+}
+
 
 .application, .shortcut {
-    width: 3vw;
-    height: 3vw; /* Hauteur égale à la largeur */
+    min-width: 3vw;
+    min-height: 3vw; /* Taille minimale, mais la div peut grandir */
     margin-top: 0.2vh;
     margin-left: 0.1vw;
-    cursor: pointer;
-    
+
     z-index: 1;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; /* L'image reste entière */
 }
 
 
-
-  #file_explorer_main{
+  #id_Home_icon{
     
     background-image: url('../img/directory.png'); /* Chemin de l'image */
     background-size: cover; /* Ajuste la taille de l'image pour couvrir toute la zone */
@@ -506,30 +834,36 @@ footer {
     left: 50%; /* Centrage horizontal */
     margin-top: 0; /* Plus besoin de margin-top */
     transition: all 0.05s ease; /* Gère les animations si nécessaire */
-    background-color: #C0C0C0; /* Exemple : pour tester */
+    background-color: #EFEFEF; /* Exemple : pour tester */
     z-index: 1;
-    border-top-right-radius: 1vw;
-    border-top-left-radius: 1vw;
+    text-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
+
     color: #212121;
+    border: 2px solid #212121;
+    animation: lightUp 2s infinite alternate;
     
   }
-  .new-square .border-inner-contener {
+   .border-inner-contener {
     width: calc(100% - 1.5vw); /* Taille légèrement plus petite que le parent */
-    height: calc(90% - 2vh); /* Taille légèrement plus petite que le parent */
-    border: 0.5vw solid #C0C0C0;
+    height: calc(90% - 1.5vh); /* Taille légèrement plus petite que le parent */
+    border: 0.5vw solid #EFEFEF;
     background-color: #212121;
     position: absolute; /* Permet de positionner cet élément indépendamment */
     top: 55%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
-    transform: translate(-50%, -50%); /* Assure le centrage parfait */
+    transform: translate(-50%, -52%); /* Assure le centrage parfait */
     justify-content: center;
     align-items: center;
-    overflow: hidden;     
+    overflow: hidden;  
+    text-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);   
     z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
     box-shadow: 
-        inset 1px 1px  0px rgba(0, 0, 0, 1),
-        -1px -1px 0px rgb(255, 255, 255),
-        1px 1px 0px rgb(0, 0, 0);
+        
+        -2px -2px 0px #212121,
+        2px 2px 0px #212121,
+        2px -2px 0px #212121,
+        -2px 2px 0px #212121;
+
   }
 
   #inner-application1{
@@ -540,7 +874,7 @@ footer {
     
     
         width: calc(100% - 1.5vw); /* Taille légèrement plus petite que le parent */
-        height: calc(100% - 1vh); /* Taille légèrement plus petite que le parent */
+        height: calc(100% - 2vh); /* Taille légèrement plus petite que le parent */
         margin: 0.5vw ;
         justify-content: center;
         overflow: auto;     
@@ -569,7 +903,7 @@ footer {
     height: 50px; /* Hauteur initiale du curseur */
     background-color: #333; /* Couleur du curseur */
     border-radius: 0; /* Pas d'arrondi, style angulaire */
-    cursor: pointer;
+
     padding: 10px;
   }
 
@@ -577,51 +911,58 @@ footer {
 .full_screen_btn,
 .close-btn {
     position: absolute;
-    width: 0.7vw;
-    height: 0.7vw;
+    width: 0.6vw;
+    height: 0.6vw;
     display: flex; /* Centre le contenu */
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    border-radius: 100px; /* Ajoute des coins arrondis */
+  
+    border-radius: 100%; /* Ajoute des coins arrondis */
     transition: background-color 0.3s ease; /* Transition pour hover */
+    
 }
 
 .minus_button {
-    background-color: green;
+    
+    background-color: #00ff22;
     right: 4vw;
     box-shadow: 
     
-    inset 1px -1px 0.1px rgb(0, 0, 0);
+    inset -1px -1px 3px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 3px #ffffff66
 }
 
 .full_screen_btn {
-    background-color: orange;
+    background-color: #ffcc00;
     right: 2.5vw;
     box-shadow: 
     
-    inset 1px -1px 0.1px rgb(0, 0, 0);
+    inset -1px -1px 3px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 3px #ffffff66
     
 }
 
 .close-btn {
-    background-color: red;
+    background-color: #ff0000;
     right: 1vw;
     box-shadow: 
-    
-    inset 1px -1px 0.1px rgb(0, 0, 0);
+    inset -1px -1px 3px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 3px #ffffff66
 }
 
 .minus_button:hover {
-    background-color: darkgreen;
+    background-color: #93ffa1;
+    box-shadow: 0px 0px 5px #00ff40,0 0 3px rgb(255, 255, 255);
 }
 
 .full_screen_btn:hover {
-    background-color: darkorange;
+    background-color: #ffe98f;
+    box-shadow: 0px 0px 5px #ffcc00,0 0 3px rgb(255, 255, 255);
 }
 
 .close-btn:hover {
-    background-color: darkred;
+    background-color: #fc4141;
+    box-shadow: 0px 0px 5px #ff0000,0 0 3px rgb(255, 255, 255);
 }
   
 .top_tab {
@@ -629,16 +970,16 @@ footer {
     
     
     left: 50%;
+    top:0.5%;
     transform: translate( -50%);
     padding: 0;
-    width: 100%; /* Il prend presque toute la largeur de la div parente */
+    width: 99%; /* Il prend presque toute la largeur de la div parente */
     height: 2.2vh; /* Sa hauteur est de 2.2% de la hauteur de la fenêtre (viewport height) */
-    background-color: #000080; /* Couleur de fond */
-    font-size: 0.6vw;
+    background-color: #001eff; /* Couleur de fond */
+    font-size: 0.4vw;
     align-items: center; /* Centre verticalement */
     display: flex;
-    border-top-right-radius: 1vw;
-    border-top-left-radius: 1vw;
+    border-radius: 5px;
     color: #ffffff;
     justify-content: center; /* Centre le contenu horizontalement */
     box-shadow: 
@@ -646,7 +987,82 @@ footer {
 
     inset 0px -1px 0px rgb(255, 255, 255),
     inset 0px 1px 1px #ffffff81;
+    text-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
 }
+
+.top_widget {
+    position: absolute; /* Permet de le fixer par rapport à la div parente */
+    
+    border-radius: 2px;
+    left: 50%;
+    top:1%;
+    transform: translate( -50%);
+    padding: 0;
+    width: 98%; /* Il prend presque toute la largeur de la div parente */
+    height: 2vh; /* Sa hauteur est de 2.2% de la hauteur de la fenêtre (viewport height) */
+    background-color: #001eff; /* Couleur de fond */
+    font-size: 0.4vw;
+    align-items: center; /* Centre verticalement */
+    display: flex;
+   
+    color: #ffffff;
+    justify-content: center; /* Centre le contenu horizontalement */
+    box-shadow: 
+    
+
+    inset 0px -1px 0px rgb(255, 255, 255),
+    inset 0px 1px 1px #ffffff81;
+
+}
+
+#eye_border_inner_contener{
+    border: 0.4vw solid #EFEFEF;
+    width: 90% ;/* Taille légèrement plus petite que le parent */
+    height: 80%; /* Taille légèrement plus petite que le parent */
+
+    background-color: #212121;
+    position: absolute; /* Permet de positionner cet élément indépendamment */
+    top: 55%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Assure le centrage parfait */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;  
+    text-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);   
+    z-index: 1; /* Assure que cette div est en dessous des autres enfants, si nécessaire */
+    box-shadow: 
+        
+        -1px -1px 0px #212121,
+        1px 1px 0px #212121,
+        1px -1px 0px #212121,
+        -1px 1px 0px #212121;
+}
+
+.widget {
+
+    
+    
+    height: 20vh; 
+    width: 12vw; 
+    position: absolute; 
+    left: 65.895vw; 
+    top: 6.8057vh; 
+    
+    
+    margin-top: 0; /* Plus besoin de margin-top */
+    transition: all 0.05s ease; /* Gère les animations si nécessaire */
+    background-color: #EFEFEF; /* Exemple : pour tester */
+    z-index: 1;
+
+    color: #212121;
+    border: 2px solid #212121;
+    
+    text-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px #18335c,0 0 3px rgb(255, 255, 255);
+    animation: lightUp 2s infinite alternate;
+  }
+
+ 
 
 #inner_application6 {
     display: flex;
@@ -655,7 +1071,7 @@ footer {
     height: 100vh; /* Définit une hauteur explicite pour le parent */
   }
 .application_name{
-    left: 1vw;
+    left: 0.5vw;
     position: absolute;
     display: flex;
 }
@@ -681,7 +1097,8 @@ footer {
   
 
 
-.content {
+.content2 {
+    
     display: flex;
     flex-direction: row;
     height: 80%; /* Prend 80% de la hauteur totale */
@@ -691,7 +1108,7 @@ footer {
 
 .header {
     position: relative;
-    background-color: #C0C0C0; /* Couleur de la section header */
+    background-color: #EFEFEF; /* Couleur de la section header */
     height: 20%; /* Prend 20% de la hauteur totale */
     width: 100%; /* S'étend sur toute la largeur */
     display: flex;
@@ -711,7 +1128,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #C0C0C0;
+    background-color: #EFEFEF;
     color: #212121;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -799,13 +1216,13 @@ input {
     align-items: center; 
     justify-content: center; 
     flex-direction: column;
-    width: 5vw; /* La largeur du dossier */
-    height: 5vh; /* La hauteur du dossier */
+    width: 19%; /* La largeur du dossier */
+    height: 20%; /* La hauteur du dossier */
     text-align: center; 
     border: 1px solid rgba(161, 161, 161, 0.473); 
     border-radius: 0px; 
     flex-shrink: 0; 
-    cursor: pointer; /* Indique que c'est cliquable */
+    
     
     
 }
@@ -825,47 +1242,38 @@ input {
     text-align: center; /* Centre le texte dans sa zone */
     margin: 0; 
     
-    overflow: hidden; /* Cache le texte si débordement */
+    overflow: clip;
     text-overflow: clip; /* Ajoute "..." si le texte est trop long */
     white-space: normal; /* Empêche de passer à la ligne */
     pointer-events: none;
     color: #212121;
 }
-
-/* Style des dossiers dans la liste */
 .list_folder {
-    background-color: #C0C0C0;
-    width: 20%;
-    height: 100%;
+    background-color: #EFEFEF;
+    width: 20%; /* Largeur de la liste des dossiers */
+    height: 90%; /* Hauteur de la liste des dossiers */
     display: flex;
     flex-direction: column; 
-    padding: 10px; 
-    overflow-y: hidden; 
+    padding: 1%; 
+    overflow: auto; /* Utilise auto pour voir la barre de défilement quand c'est nécessaire */
+    overflow-y: scroll; /* Permet le défilement vertical */
     font-size: 0.5vw;
-    column-gap: 2%;
-    box-shadow: 
-    inset 1px 0px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 1);
     color: #212121;
-   
-    
 }
 
-
-
-.list_folder_contener{
+.list_folder_contener {
     background-color: #FFFFFF;
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Largeur de la zone de contenu */
+    
+    height: calc(100% - 20px); /* Ajuste la hauteur pour inclure les bordures et le padding */
     display: flex;
     flex-direction: column; 
     padding: 0; 
-    overflow-y: hidden; 
+    overflow:clip;
     font-size: 0.5vw;
-    column-gap: 2%;
-    box-shadow: 
-    inset 1px 0px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 1);
     color: #212121;
-
 }
 /* Style des inner folders */
 .inner_folders {
@@ -880,7 +1288,7 @@ input {
     padding: 10px; 
     row-gap: 0.5vh; 
     column-gap: 0.2vw; 
-    overflow-y: visible;
+    overflow-y: scroll;
     box-shadow: 
     inset 1px 0px 0px rgba(0, 0, 0, 1),
     inset -1px -1px 0px rgba(255, 255, 255, 1);
@@ -903,7 +1311,7 @@ input {
 
 
 .list_folder_contener  .folder {
-    
+    margin-top:2% ;
     display: flex; /* Aligne le contenu interne */
     flex-direction: row;
     align-items: center; /* Centre verticalement l'image et le texte */
@@ -913,7 +1321,7 @@ input {
     text-align: center; /* Centre le texte */
     border-radius: 0px; /* Coins arrondis */
     flex-shrink: 0; /* Empêche la réduction automatique de la taille des dossiers */
-    cursor: pointer;
+
     
 }
   
@@ -942,7 +1350,7 @@ input {
     left: 0;
     width: 100%;
     height: 5%;
-    background-color: #C0C0C0;
+    background-color: #EFEFEF;
     display: flex;
     padding: 0;
     border-top: 1px solid #FFFFFF;
@@ -993,26 +1401,72 @@ details details {
     height: 0.2%;
     width: 90%;
     background-color: #212121;
-    margin: 1%;
+    margin: 5%;
     
     transform: translateX(5%);
 }
 
 .content{
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 100%;
+    overflow: auto;
+    overflow-y: scroll;
 }
 canvas{
     height: 100%;
     width: 100%;
 }
 
-.text_area{
+.loading_url{
     width: 100%;
     height: 100%;
     border: none;
     outline: none;
     resize: none;
     font-family: monospace;
-    padding: 10px;
+    font-size: 0.8vw;
+    font-family: 'Press Start 2P';
+    font-family: monospace;
+    white-space: pre;
+    word-wrap: break-word;
+    background-color: #041127;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1;
 }
+
+
+.scale-slider {
+    position: absolute;
+    left: 5%;
+    width: 20%;
+    height: 8px;
+    background: #898989;
+    border-radius: 0;
+    cursor: none;
+    -webkit-appearance: none; /* Supprime le style par défaut sur Chrome/Safari */
+    appearance: none;
+}
+
+/* Personnalisation du curseur sur WebKit (Chrome, Safari) */
+.scale-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #1f34d4;
+    border-radius: 0;
+    cursor: none;
+}
+
+/* Personnalisation du curseur sur Firefox */
+.scale-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #1f34d4;
+    border-radius: 0;
+    cursor: none;
+}
+

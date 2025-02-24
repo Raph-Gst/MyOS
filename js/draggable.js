@@ -1,23 +1,54 @@
 
-export function getRandomPosition(min, max, step, usedPositions) {
-    let randomValue;
-    do {
-        randomValue = Math.round((Math.random() * (max - min) + min) / step) * step;
-    } while (usedPositions.includes(randomValue));
+export function getRandomPosition(min, max, step) {
+    let randomValue = Math.round((Math.random() * (max - min) + min) / step) * step;
     return randomValue;
 }
 
 export function positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
     const menuItems = document.querySelectorAll('.menu_item');
+
     const usedPositions = [];
 
-    menuItems.forEach(item => {
+    // Récupérer la position et la taille du widget en pixels
+    const widget = document.getElementById('eye_widget');
+    if (!widget) {
+
+        return;
+    }
+
+    const widgetRect = widget.getBoundingClientRect();
+
+    // Convertir en vw/vh
+    const widgetBounds = {
+        left: (widgetRect.left / window.innerWidth) * 100,  // en vw
+        top: (widgetRect.top / window.innerHeight) * 100,   // en vh
+        width: (widgetRect.width / window.innerWidth) * 100,  // en vw
+        height: (widgetRect.height / window.innerHeight) * 100 // en vh
+    };
+
+    widgetBounds.right = widgetBounds.left + widgetBounds.width;
+    widgetBounds.bottom = widgetBounds.top + widgetBounds.height;
+
+    menuItems.forEach((item, index) => {
         let left, top;
+        let tries = 0; // Pour éviter une boucle infinie
 
         do {
-            left = getRandomPosition(minWidth, maxWidth, stepWidth, usedPositions);
-            top = getRandomPosition(minHeight,maxHeight, stepHeight, usedPositions);
-        } while (usedPositions.some(pos => pos.left === left && pos.top === top));
+            left = getRandomPosition(minWidth, maxWidth, stepWidth);
+            top = getRandomPosition(minHeight, maxHeight, stepHeight);
+
+            tries++;
+            if (tries > 100) {
+                console.warn("Trop d'essais, sortie de la boucle pour éviter une boucle infinie");
+                break;
+            }
+        } while (
+            // Vérifier si la position chevauche le widget
+            (left + 10 > widgetBounds.left && left < widgetBounds.right &&
+             top + 7 > widgetBounds.top && top < widgetBounds.bottom) ||
+            // Vérifier si la position est déjà utilisée
+            usedPositions.some(pos => pos.left === left && pos.top === top)
+        );
 
         usedPositions.push({ left, top });
 
@@ -25,6 +56,8 @@ export function positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, step
         item.style.top = `${top}vh`;
     });
 }
+
+
 
 
 export function enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {

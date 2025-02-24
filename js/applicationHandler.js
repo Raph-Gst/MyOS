@@ -63,6 +63,7 @@ export async function openFolders(id) {
         console.error(`L'élément avec l'ID inner_folders_${id} n'a pas été trouvé.`);
         return;
     }
+    
 
     tab.addEventListener('click', async (e) => {
         if (e.target.className === 'folder' && !e.target.id.includes('.')) {
@@ -191,7 +192,7 @@ export function createItemElement(type, name, extension = '') {
   element.id = name;
 
   const img = document.createElement('img');
-  if(name == 'Documents' || name =='Home' || name =='Bin' || name =='Téléchargements' || name =='Images' ||name =='Musique' ||name =='Bureau'){
+  if(name == 'Documents' || name =='Home' || name =='Bin' || name =='Downloads' || name =='Images' ||name =='Musics' ||name =='Desktop'){
     img.src = `img/${name}.png`
   }
   else img.src = type === 'folder' ? 'img/directory.png' : `img/${extension}.png`;
@@ -215,7 +216,7 @@ export async function loadTextFile(id) {
 
     try {
         console.log(id);
-        const response = await fetch(`img/${id.replace('txt_tab', '')}.txt`);
+        const response = await fetch(`img/txt/${id.replace('txt_tab', '')}.txt`);
         if (!response.ok) {
             throw new Error(`Impossible de charger le fichier img/${id}.txt`);
         }
@@ -226,3 +227,84 @@ export async function loadTextFile(id) {
         console.error("Erreur lors du chargement du fichier texte:", error);
     }
 }
+
+export function startLoadingAnimation(id, path) {
+    const textArea = document.getElementById(`loading_url_${id}`);
+    if (!textArea) return; // Sécurité : ne fait rien si l'ID n'existe pas
+
+    let progress = 0;
+    const totalDuration = 1500;
+    const interval = 15;
+    const totalSteps = totalDuration / interval;
+    const barLength = 30;
+
+    const updateLoading = setInterval(() => {
+      if (progress <= totalSteps) {
+        updateTextArea(textArea, progress, totalSteps, barLength, id);
+        progress += 1;
+      } else {
+        clearInterval(updateLoading);
+        redirectTo(id, path);
+      }
+    }, interval);
+  }
+  
+  function updateTextArea(textArea, progress, totalSteps, barLength, id) {
+    const dots = ['.', '..', '...'][progress % 3]; // Animation des points
+    const fillCount = Math.floor((progress / totalSteps) * barLength); // Nombre de '#' remplis
+    const emptyCount = barLength - fillCount; // Espaces restants
+    const percentage = Math.floor((progress / totalSteps) * 100); // Progression en %
+  
+    const loadingText = `Redirection${dots}  [${"#".repeat(fillCount)}${" ".repeat(emptyCount)}] ${percentage}%`;
+
+    const asciiArtLinkedin = 
+    `###+++                
+###+-+#               
+ #####                
+###+++###+++#++++++#  
+###+-+###++++++++-.-+ 
+###+-+###++-+###++--+#
+###+-+###+--#  ##+---#
+###+-+###+--#  ##+---#
+###+-+###+--#  ##+---#
+###+-+###+--#  ##+---#
+###+++###+++#  ##++-+#
+#############   ######
+    `;
+
+    const asciiArtGithub = 
+    `     ++++++#++++      
+   #++###    ###+++   
+ ++#+           ##++  
+ +## ##+#+#++##+  ##+ 
++#+  #####++++++   ##+
+#+  #######++++++   #+
+#+  ##########+++   #+
++#+ + ##########   #++
+ ++ ### ###++     ##++
+ ++++##+####++   ##+# 
+   ###+#####++###++   
+     +######+++++         
+    `
+
+    if (id.includes("Github")) {
+        textArea.value = asciiArtGithub + "\n" + loadingText + "\n";
+    } else if (id.includes("Linkedin")) {
+        textArea.value = asciiArtLinkedin + "\n" + loadingText + "\n";
+    }
+  
+    
+  }
+  
+  function redirectTo(id, path) {
+    const tabElement = document.getElementById(id);
+    const iconElement = document.getElementById(`${id.replace('_tab', '')}_icon`);
+    console.log(id);
+    if (tabElement) {
+        tabElement.remove(); // Supprime la div si elle existe
+        iconElement.remove();
+    }
+    window.open(path, '_blank', 'width=800,height=600'); 
+}
+  
+  

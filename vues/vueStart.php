@@ -1,45 +1,32 @@
 <!--<img id="start" class="start" src="img/tv_on.gif" alt="Transition Image"> -->
+<div class="screen_start">
 
-<div class="landing-start">
-    <div class="landing-start-container">
-      <h2 id="landing-start-button" class="landing-start-text">
-        <span class="landing-start-arrow">›</span>
-        <a class="start_button" style="cursor:pointer;" href="index.php?page=accueil" >PRESS START</a>
-      </h2>
+    <div class="rectangular-bar-top">
+        <img src="img/logo_start_menu_os.png" alt="Logo OS" class="logo-os">
+        <div class="additional-container" style="border-right: 1px solid rgb(239, 239, 239); height: 80%; margin-left: 0.5vw; display: flex; align-items: center; margin-left:2vw;   box-shadow: 
+        
+        1px 1px 0px rgba(0, 0, 0, 1),
+        -1px -1px 0px rgb(130, 130, 130);"></div>
+        <div class="datetime" id="datetime"></div>
     </div>
+    <div class="container_profile">
+      <div class="landing-profile-container">
+          <div class="profile_image_contener">
+          
+          </div>
+          <p class="profile_name">Raphaël Gosset</p>
+        
+      </div>
+
+      <div class="landing-start-container">
+        <h2 id="landing-start-button" class="landing-start-text">
+          <a class="start_button" href="index.php?page=accueil" >START</a>
+        </h2>
+      </div>
+
+    </div>
+
+    </div>
+
 </div>
 
-
-
-
-
-<!-- <nav class="start_menu">
-        <div class="menu_item">
-            <a href="index.php?page=accueil">Press </a>
-            <img src="img/selecteur_doigt.gif" class="hover_gif" alt="GIF">
-        </div>
-        <div class="menu_item">
-            <a href="#">fefefeffe</a>
-            <img src="img/selecteur_doigt.gif" class="hover_gif" alt="GIF">
-        </div>
-        
-    </nav> 
-
-<script>
-    var hasShownGif = false;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var transitionGif = document.getElementById('start');
-
-        if (!hasShownGif) {
-            transitionGif.style.display = 'block';
-
-            // Masquer le GIF après un délai (par exemple, 3 secondes)
-            setTimeout(function() {
-                transitionGif.style.display = 'none';
-                hasShownGif = true;
-            }, 600); // 3000 ms = 3 secondes
-        }
-    });
-
-</script>-->

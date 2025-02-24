@@ -6,10 +6,10 @@
 <img class="tele" src="img\tele_catho.png" alt="tele" >
 <img class="tele2" src="img\telecool.png" alt="tele" >
 
- <video id="background-video" controls loop muted autoplay class="transparent-video">
+  <video id="background-video" controls loop muted autoplay class="transparent-video">
     <source class="video" src="img\1076573783-preview_hitpaw.com.mp4" type="video/mp4">
     Votre navigateur ne prend pas en charge la balise vidéo.
-</video>
+</video> 
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -21,6 +21,6 @@
 
             videoElement.style.opacity = 0;
         }
-        else videoElement.style.opacity = 0.05;
+        else videoElement.style.opacity = 0.03;
     });
 </script>

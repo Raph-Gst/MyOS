@@ -7,10 +7,10 @@ require_once('modele/modele.php');
 <html>
 <head>
     <meta charset="utf-8">
-    <title>TéléDemande</title>
+    <title>MyOS</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <link href="css/home.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="img/logo_start_menu_os.png">
 
     
 </head>
@@ -52,7 +52,7 @@ require_once('modele/modele.php');
         <source src="img/transition_video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    <script type="module" src="js/main.js" ></script>
+    <script type="module" src="js/index.js" ></script>
 
 </body>
 </html>

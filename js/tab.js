@@ -1,4 +1,4 @@
-import { update_file_explorer , openFolders, openShortcut,  loadTextFile} from './applicationHandler.js';
+import { update_file_explorer , openFolders, openShortcut,  loadTextFile, startLoadingAnimation} from './applicationHandler.js';
 
 import { load3DModel } from './meshHandler.js'; // Assurez-vous que le chemin est correct
 
@@ -13,6 +13,8 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   const newSquare = createDiv(id, 'new-square', '', parentElement, backgroundImagePath, width, height);
 
   if(!newSquare) return;
+
+ 
 
 
   let fullscreen = false;
@@ -51,8 +53,8 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   fullScreenButton.addEventListener('click', function () {
     if (!fullscreen) {
       newSquare.style.width = '98.5%';
-      newSquare.style.height = '91%';
-      newSquare.style.top = '1%';
+      newSquare.style.height = '95%';
+      newSquare.style.top = '4vh';
       newSquare.style.left = '0.5%';
       newSquare.style.position = 'absolute'; 
       fullscreen = true;
@@ -127,6 +129,7 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   
   export function createDiv(id, className, textContent, parentElement, backgroundImagePath, width, height) {
     const newDiv = document.createElement('div');
+    
   
     if (id) {
       newDiv.id = id;
@@ -155,9 +158,11 @@ export function createSquare(parentElement, id, id2, id3, id4, backgroundImagePa
   
     if (parentElement) {
       const existingApp = parentElement.querySelector('#' + id);
-      console.log("le truc est " + existingApp);
       if (existingApp) {
+       
         console.log('Une application avec cet ID est déjà ouverte.');
+        
+       
         return;
       } else {
         parentElement.appendChild(newDiv);
@@ -202,7 +207,7 @@ export function createExplorerSquare(parentElement, id, id2, id3, id4, backgroun
         </div>
       </div>
 
-      <div class="content" id="content_${id}">
+      <div class="content2" id="content_${id}">
         <div class="list_folder" id="list_folder_${id}">
           <div class="list_folder_contener" id="list_folder_contener_${id}"></div>
         </div>
@@ -236,21 +241,33 @@ export function createPictureSquare(parentElement, id, id2, id3, id4, background
   const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
   
   if (borderInnerContainer) {
+    const imagePath = `img/illustrations/${id.replace('png_tab', '')}.png`;
+
     borderInnerContainer.innerHTML = `
-
-
-      <div class="content" id="content_${id}">
+      <div class="content" id="content_${id}" style="display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; height: 100%;">
+        <img src="${imagePath}" alt="Image" id="image_${id}" class="image_" style="width: 100%; height: auto; transform: scale(1); transition: transform 0.2s ease-in-out;">
+      </div>
+      <div class="footer_file_explorer" id="footer_file_explorer_${id}" style="top:0; display: flex; justify-content: center; align-items: center; padding: 5px;">
+        <input type="range" class="scale-slider" id="scaleSlider_${id}" min="0.1" max="2" step="0.01" value="0.5" oninput="document.getElementById('image_${id}').style.transform = 'scale(' + this.value + ')';">
 
       </div>
 
-      <div class="footer_file_explorer" id="footer_file_explorer_${id}">
-
-      </div>
     `;
   }
 
   return newSquare;
 }
+
+// Fonction pour ajuster la taille de l'image
+window.resizeImage = function(id, change) {
+  const img = document.getElementById(`image_${id}`);
+  if (img) {
+    let currentWidth = img.clientWidth;
+    let newWidth = currentWidth + change;
+    img.style.width = `${newWidth}px`;
+  }
+};
+
 
 export function createMusicSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
   
@@ -297,7 +314,7 @@ export function createTextSquare(parentElement, id, id2, id3, id4, backgroundIma
       </div>
     `;
   }
-  loadTextFile(id)
+  loadTextFile(id);
   return newSquare;
 }
 
@@ -314,7 +331,7 @@ export function createPDFSquare(parentElement, id, id2, id3, id4, backgroundImag
   if (borderInnerContainer) {
     borderInnerContainer.innerHTML = `
       <div class="content" id="content_${id}">
-        <iframe src="img/${id.replace("pdf_tab", '')}.pdf" width="100%" height="100%"></iframe>
+        <embed  src="img/pdf/${id.replace("pdf_tab", '')}.pdf" width="100%" height="100%"/>
       </div>
     `;
   }
@@ -343,12 +360,63 @@ export function create3DSquare(parentElement, id, id2, id3, id4, backgroundImage
     `;
   }
 
-  const modelPath = 'path/to/your/model.glb'; // Remplacez par le chemin de votre modèle
+
   const containerDiv = document.getElementById(`content_${id}`);
   // Remplacez par l'ID de votre div
-  console.log(id);
-  load3DModel(containerDiv);
+  console.log("l'id est" ,id);
+  load3DModel(containerDiv, id.replace('blend_tab', ''));
   
+  return newSquare;
+}
+
+  export function createErrorSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text) {
+  
+    const uniqueId = `${id}`;
+  
+    // Appeler createSquare pour créer la base du "tab"
+    const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+  
+    // Sélectionner le conteneur principal où ajouter le contenu
+    const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+    
+    if (borderInnerContainer) {
+      borderInnerContainer.innerHTML = `
+  
+  
+        <div class="content" id="content_${id}">
+  
+        </div>
+  
+      `;
+    }
+
+
+  
+  return newSquare;
+}
+
+export function createOtherSquare(parentElement, id, id2, id3, id4, backgroundImagePath, width, height, text,path) {
+  
+  const uniqueId = `${id}`;
+
+  // Appeler createSquare pour créer la base du "tab"
+  const newSquare = createSquare(parentElement, uniqueId, id2, id3, id4, backgroundImagePath, width, height, text);
+
+  // Sélectionner le conteneur principal où ajouter le contenu
+  const borderInnerContainer = document.getElementById(id3); // Correspond à `border-inner-contener`
+  console.log("l'id est :" + id3);
+  
+  if (borderInnerContainer) {
+    borderInnerContainer.innerHTML = `
+      <div class="content" id="content_${id}">
+        <textarea id="loading_url_${id}" class="loading_url"></textarea>
+      
+      
+
+      </div>
+    `;
+  }
+  startLoadingAnimation(id, path);
   return newSquare;
 }
 
@@ -530,71 +598,50 @@ export function OpenApplication(id) {
           const appName = app.replace(`.`, ''); // Supprime l'extension du nom du fichier
           console.log(app + ' ' + ' ' + extension + ' ' + appName)
 
-          if(extension == "png"){
-            createPictureSquare(screen, 
-              `${appName}_tab`, 
-              `${appName}_icon`, 
-              `${appName}_border_inner_contener`, 
-              `${appName}_inner_contener`, 
-              '', 
-              width, 
-              height, 
-              `${app}`);
-
-          }else if(extension == "blend"){
-            create3DSquare(screen, 
-              `${appName}_tab`, 
-              `${appName}_icon`, 
-              `${appName}_border_inner_contener`, 
-              `${appName}_inner_contener`, 
-              '', 
-              width, 
-              height, 
-              `${app}`);
-          }else if(extension == "pdf"){
-            createPDFSquare(screen, 
-              `${appName}_tab`, 
-              `${appName}_icon`, 
-              `${appName}_border_inner_contener`, 
-              `${appName}_inner_contener`, 
-              '', 
-              width, 
-              height, 
-              `${app}`);
-          }else if(extension == "txt"){
-            createTextSquare(screen, 
-              `${appName}_tab`, 
-              `${appName}_icon`, 
-              `${appName}_border_inner_contener`, 
-              `${appName}_inner_contener`, 
-              '', 
-              width, 
-              height, 
-              `${app}`);
-          }else if(extension == "mp3"){
-            createMusicSquare(screen, 
-              `${appName}_tab`, 
-              `${appName}_icon`, 
-              `${appName}_border_inner_contener`, 
-              `${appName}_inner_contener`, 
-              '', 
-              width, 
-              height, 
-              `${app}`);
-          }
-          else{
+          const createFunctionMap = {
+            png: createPictureSquare,
+            blend: create3DSquare,
+            pdf: createPDFSquare,
+            txt: createTextSquare,
+            mp3: createMusicSquare
+          };
+          if (createFunctionMap[extension]) {
+            try {
+              createFunctionMap[extension](
+                screen,
+                `${appName}_tab`,
+                `${appName}_icon`,
+                `${appName}_border_inner_contener`,
+                `${appName}_inner_contener`,
+                '',
+                width,
+                height,
+                app
+              );
+            } catch (error) {
+              console.error("Erreur lors de la création de la fenêtre :", error);
+              num++;
+              t.createErrorSquare(screen, `error${num}_tab`, '', `id_error${num}_border_inner_contener`, `id_error${num}_inner_contener`, '', '30', '20', 'error');
+            }
+          } else {
+            try {
               createSquare(
-                screen, 
-                `${appName}_tab`, 
-                `${appName}_icon`, 
-                `${appName}_border_inner_contener`, 
-                `${appName}_inner_contener`, 
-                '', 
-                width, 
-                height, 
-                `${app}`
-            );
-            console.error("probleme avec " + extension);
+                screen,
+                `${appName}_tab`,
+                `${appName}_icon`,
+                `${appName}_border_inner_contener`,
+                `${appName}_inner_contener`,
+                '',
+                width,
+                height,
+                app
+              );
+              console.log("Ouvert :", app);
+            } catch (error) {
+              console.error("Erreur lors de l'ouverture du fichier :", error);
+              num++;
+              createErrorSquare(screen, `error${num}_tab`, '', `id_error${num}_border_inner_contener`, `id_error${num}_inner_contener`, '', '30', '20', 'error');
+            }
           } 
           if(extension !='exe'){
             createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${extension}.png`, '', '');
@@ -602,8 +649,47 @@ export function OpenApplication(id) {
           else {
             createDiv(`${appName}_icon`, "application", '', rectangularBar, `img/${appName.replace(`${extension}`,'')}.png`, '', '');
           }
-
+          addRecentFiles(e.target);
       }
   });
 }
+
+export function addRecentFiles(div) {
+  const recentFilesDiv = document.querySelector(".recent_files"); 
+
+  if (!recentFilesDiv) {
+      console.error("L'élément recent_files n'existe pas.");
+      return;
+  }
+
+  if (recentFilesDiv.children.length + 1 > 6) {
+    recentFilesDiv.removeChild(recentFilesDiv.lastChild);
+  }
+
+  const menuItem = document.createElement('div');
+  menuItem.className = 'menu_item';
+  menuItem.id = div.id; 
+
+  const img = document.createElement('img');
+
+  img.src = div.querySelector('img').src;
+
+  const anchor = document.createElement('a');
+  anchor.className = 'menu_link';
+  anchor.textContent = div.id; 
+
+  menuItem.appendChild(img);
+  menuItem.appendChild(anchor);
+  const menuItems = recentFilesDiv.children;
+  for (let item of menuItems) {
+      if (item.id === menuItem.id) {
+          console.log('Found Item:', item);
+          recentFilesDiv.removeChild(item);
+          break;
+      }
+  }
+
+  recentFilesDiv.insertBefore(menuItem, recentFilesDiv.firstChild);
+}
+
 
