@@ -427,7 +427,7 @@ export function enableDrag2(classname) {
       // Ignorer si l'élément cliqué n'a pas la classe spécifiée
       if (!item) return;
 
-      item = item.parentElement;
+      
       
       // Ignorer si l'élément cliqué est un descendant de la classe "scroll-bar"
       if (e.target.closest('.scroll_bar')) return;

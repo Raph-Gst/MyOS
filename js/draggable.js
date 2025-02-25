@@ -62,82 +62,70 @@ export function positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, step
 
 export function enableDrag(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
     
-        document.addEventListener('pointerdown', function (e) {
+    document.addEventListener('pointerdown', function (e) {
+        let item = e.target.closest(`.menu_item`);
 
-            let item = e.target.closest(`.menu_item`);
+        if (!item) return;
 
-            // Ignorer si l'élément cliqué n'a pas la classe spécifiée
-             if (!item) return;
+        const rect = item.getBoundingClientRect();
+        const shiftX = e.clientX - rect.left;
+        const shiftY = e.clientY - rect.top;
+        let isMoved = false;
 
-            
-            const rect = item.getBoundingClientRect(); // Récupère la position et les dimensions de l'élément
-            const shiftX = e.clientX - rect.left;
-            const shiftY = e.clientY - rect.top;
+        function moveAt(pageX, pageY) {
+            const newLeft = pageX - shiftX;
+            const newTop = pageY - shiftY;
 
-            let isMoved = false;
+            const newLeftVW = (newLeft / window.innerWidth) * 100;
+            const newTopVH = (newTop / window.innerHeight) * 100;
 
-            // Fonction pour déplacer l'élément
-            function moveAt(pageX, pageY) {
-                // Calcul des nouvelles positions en pixels
-                const newLeft = pageX - shiftX;
-                const newTop = pageY - shiftY;
+            item.style.left = `${newLeftVW - 7}vw`;
+            item.style.top = `${newTopVH - 10}vh`;
 
-                // Conversion des pixels en unités relatives (vw et vh)
-                const newLeftVW = (newLeft / window.innerWidth) * 100;
-                const newTopVH = (newTop / window.innerHeight) * 100;
+            isMoved = true;
+        }
 
-                // Appliquer les nouvelles positions
-                item.style.left = `${newLeftVW -7}vw`;
-                item.style.top = `${newTopVH - 10}vh`;
+        function snapToGrid(value, gridSize) {
+            return Math.round(value / gridSize) * gridSize;
+        }
 
-                isMoved = true;
-            }
+        function onPointerMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
 
-            // Fonction pour ajuster la position à la grille
-            function snapToGrid(value, gridSize) {
-                return Math.round(value / gridSize) * gridSize;
-            }
+        document.addEventListener('pointermove', onPointerMove);
 
-            // Écouteur pour suivre les mouvements
-            function onPointerMove(event) {
-                moveAt(event.pageX, event.pageY);
-            }
+        document.addEventListener(
+            'pointerup',
+            function () {
+                document.removeEventListener('pointermove', onPointerMove);
 
-            document.addEventListener('pointermove', onPointerMove);
+                if (!isMoved) return;
 
-            item.addEventListener(
-                'pointerup',
-                function () {
+                const currentLeftVW = parseFloat(item.style.left);
+                const currentTopVH = parseFloat(item.style.top);
 
-                    document.removeEventListener('pointermove', onPointerMove);
+                const gridWidthVW = stepWidth;
+                const gridHeightVH = stepHeight;
 
-                    if (!isMoved) return;
+                const snappedLeftVW = snapToGrid(currentLeftVW, gridWidthVW);
+                const snappedTopVH = snapToGrid(currentTopVH, gridHeightVH);
 
-                    const currentLeftVW = parseFloat(item.style.left);
-                    const currentTopVH = parseFloat(item.style.top);
+                if (snappedLeftVW <= minWidth) item.style.left = `${minWidth}vw`;
+                else if (snappedLeftVW >= maxWidth) item.style.left = `${maxWidth}vw`;
+                else item.style.left = `${snappedLeftVW}vw`;
 
-                    const gridWidthVW = stepWidth; 
-                    const gridHeightVH = stepHeight; 
-
-                    const snappedLeftVW = snapToGrid(currentLeftVW, gridWidthVW);
-                    const snappedTopVH = snapToGrid(currentTopVH, gridHeightVH);
-                   
-                    if (snappedLeftVW <= minWidth) item.style.left = `${minWidth}vw`;
-                    else if (snappedLeftVW >= maxWidth) item.style.left = `${maxWidth}vw`;
-                    else{item.style.left = `${snappedLeftVW}vw`}
-
-                    if (snappedTopVH <= minHeight) item.style.top = `${minHeight}vh`;
-                    else if (snappedTopVH >= maxHeight) item.style.top = `${maxHeight}vh`;
-                    else{item.style.top = `${snappedTopVH}vh`;}
-                    
-                },
-                { once: true }
-            );
-        
+                if (snappedTopVH <= minHeight) item.style.top = `${minHeight}vh`;
+                else if (snappedTopVH >= maxHeight) item.style.top = `${maxHeight}vh`;
+                else item.style.top = `${snappedTopVH}vh`;
+            },
+            { once: true }
+        );
 
         item.ondragstart = () => false;
     });
 }
+
 
 export function initialize(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth) {
     positionMenuItems(minHeight, minWidth, maxHeight, maxWidth, stepHeight, stepWidth);

@@ -4,7 +4,7 @@ import * as t  from './tab.js';
 import * as d  from './scroll_bar.js';
 
 export function tab() {
-  t.enableDrag2("top_tab");
+  t.enableDrag2("new-square");
   
 
   const rectangularBar = document.querySelector('.rectangular-bar');
