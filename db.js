@@ -1,18 +1,19 @@
 import mysql from 'mysql2/promise';
 
-// Configuration de la connexion à MySQL
+
+import 'dotenv/config';
+
 const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Starwars2002?', // Remplace par ton vrai mot de passe
-    database: 'file_explorer_db',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS, 
+    database: process.env.DB,
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
     port: 3307
 });
 
-// Fonction pour exécuter une requête SQL
 export async function executeQuery(query, params = []) {
     try {
         const [rows] = await pool.execute(query, params);
@@ -23,8 +24,6 @@ export async function executeQuery(query, params = []) {
     }
 }
 
-
-// Nouvelle fonction pour récupérer des fichiers selon une requête
 export async function getFiles(query) {
     if (!query.startsWith('SELECT')) {
         throw new Error('La requête doit commencer par SELECT');
