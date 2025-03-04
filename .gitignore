@@ -1,0 +1,34 @@
+# Node.js
+node_modules/
+img/
+npm-debug.log*
+package-lock.json
+app.js
+db.js
+file_explorer.sql
+# Environnements
+.env
+.DS_Store
+
+# Logs
+logs/
+*.log
+yarn-debug.log*
+yarn-error.log*
+
+# Système
+Thumbs.db
+.vscode/
+.idea/
+*.bak
+*.swp
+
+
+# Build et cache
+dist/
+.cache/
+out/
+
+# Fichiers du serveur
+*.pid
+*.sock
