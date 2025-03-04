@@ -7,10 +7,6 @@ Bienvenue sur **MyOS** ! Ce projet est un site portfolio interactif qui simule u
 1. [Introduction](#introduction)
 2. [Fonctionnalités](#fonctionnalités)
 3. [Technologies utilisées](#technologies-utilisées)
-4. [Installation](#installation)
-5. [Utilisation](#utilisation)
-6. [Contribuer](#contribuer)
-7. [Licence](#licence)
 
 ## Introduction
 
@@ -21,7 +17,7 @@ Bienvenue sur **MyOS** ! Ce projet est un site portfolio interactif qui simule u
 - **Interface immersive** : Simule l'expérience d'un ordinateur avec des fenêtres, des icônes et des animations.
 - **Présentation des projets** : Consultez mes projets réalisés et mes compétences techniques.
 - **Navigation intuitive** : Accédez facilement aux différentes sections via un système de menus, avec des transitions fluides grâce à **Swup**.
-- **Gestion dynamique des pages** : Utilisation de **PHP** pour le tramage des pages et l'intégration de la base de données.
+- **Gestion dynamique des pages** : Utilisation de **PHP** et **JavaScript** pour le tramage des pages et l'intégration de la base de données.
 - **Responsive design** : Optimisé pour s'afficher correctement sur tous les appareils.
 
 ## Technologies utilisées
